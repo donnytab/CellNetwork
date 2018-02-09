@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <queue>
+#include <mutex>
 #include <memory>
 #include <string.h>
 #include <omnetpp.h>
@@ -22,6 +23,8 @@ class PicoCell : public cSimpleModule
 {
 private:
     priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
+    mutex mtx;
+    condition_variable conVar;
   protected:
 //    virtual EnergyMsg *generateMessage();
     virtual void forwardMessage(EnergyMsg *msg);
@@ -41,9 +44,11 @@ void PicoCell::handleMessage(cMessage *msg)
 
     eMsg->setPriority(eMsg->getSource());
 
+    unique_lock<mutex> lck(mtx);
     if(eMsg) {
         energyQueue.push(eMsg);
         bubble("PUSH!");
+        conVar.notify_one();
     }
 
     while(!energyQueue.empty()) {
