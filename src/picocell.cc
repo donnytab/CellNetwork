@@ -42,7 +42,7 @@ void PicoCell::handleMessage(cMessage *msg)
     eMsg->setPriority(eMsg->getSource());
 
     if(eMsg) {
-        energyQueue.push(eMsg);
+        energyQueue.push(eMsg);fsefe
         bubble("PUSH!");
     }
 
