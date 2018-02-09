@@ -188,6 +188,7 @@ EnergyMsg::EnergyMsg(const char *name, short kind) : ::omnetpp::cMessage(name,ki
         this->timestamp[i] = 0;
     for (unsigned int i=0; i<60; i++)
         this->energyCost[i] = 0;
+    this->priority = 0;
 }
 
 EnergyMsg::EnergyMsg(const EnergyMsg& other) : ::omnetpp::cMessage(other)
@@ -216,6 +217,7 @@ void EnergyMsg::copy(const EnergyMsg& other)
         this->timestamp[i] = other.timestamp[i];
     for (unsigned int i=0; i<60; i++)
         this->energyCost[i] = other.energyCost[i];
+    this->priority = other.priority;
 }
 
 void EnergyMsg::parsimPack(omnetpp::cCommBuffer *b) const
@@ -226,6 +228,7 @@ void EnergyMsg::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->hopCount);
     doParsimArrayPacking(b,this->timestamp,60);
     doParsimArrayPacking(b,this->energyCost,60);
+    doParsimPacking(b,this->priority);
 }
 
 void EnergyMsg::parsimUnpack(omnetpp::cCommBuffer *b)
@@ -236,6 +239,7 @@ void EnergyMsg::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->hopCount);
     doParsimArrayUnpacking(b,this->timestamp,60);
     doParsimArrayUnpacking(b,this->energyCost,60);
+    doParsimUnpacking(b,this->priority);
 }
 
 int EnergyMsg::getSource() const
@@ -300,6 +304,16 @@ void EnergyMsg::setEnergyCost(unsigned int k, double energyCost)
 {
     if (k>=60) throw omnetpp::cRuntimeError("Array of size 60 indexed by %lu", (unsigned long)k);
     this->energyCost[k] = energyCost;
+}
+
+int EnergyMsg::getPriority() const
+{
+    return this->priority;
+}
+
+void EnergyMsg::setPriority(int priority)
+{
+    this->priority = priority;
 }
 
 class EnergyMsgDescriptor : public omnetpp::cClassDescriptor
@@ -367,7 +381,7 @@ const char *EnergyMsgDescriptor::getProperty(const char *propertyname) const
 int EnergyMsgDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 5+basedesc->getFieldCount() : 5;
+    return basedesc ? 6+basedesc->getFieldCount() : 6;
 }
 
 unsigned int EnergyMsgDescriptor::getFieldTypeFlags(int field) const
@@ -384,8 +398,9 @@ unsigned int EnergyMsgDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,
         FD_ISARRAY | FD_ISEDITABLE,
         FD_ISARRAY | FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<5) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<6) ? fieldTypeFlags[field] : 0;
 }
 
 const char *EnergyMsgDescriptor::getFieldName(int field) const
@@ -402,8 +417,9 @@ const char *EnergyMsgDescriptor::getFieldName(int field) const
         "hopCount",
         "timestamp",
         "energyCost",
+        "priority",
     };
-    return (field>=0 && field<5) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<6) ? fieldNames[field] : nullptr;
 }
 
 int EnergyMsgDescriptor::findField(const char *fieldName) const
@@ -415,6 +431,7 @@ int EnergyMsgDescriptor::findField(const char *fieldName) const
     if (fieldName[0]=='h' && strcmp(fieldName, "hopCount")==0) return base+2;
     if (fieldName[0]=='t' && strcmp(fieldName, "timestamp")==0) return base+3;
     if (fieldName[0]=='e' && strcmp(fieldName, "energyCost")==0) return base+4;
+    if (fieldName[0]=='p' && strcmp(fieldName, "priority")==0) return base+5;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -432,8 +449,9 @@ const char *EnergyMsgDescriptor::getFieldTypeString(int field) const
         "int",
         "long",
         "double",
+        "int",
     };
-    return (field>=0 && field<5) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<6) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **EnergyMsgDescriptor::getFieldPropertyNames(int field) const
@@ -507,6 +525,7 @@ std::string EnergyMsgDescriptor::getFieldValueAsString(void *object, int field, 
         case 2: return long2string(pp->getHopCount());
         case 3: return long2string(pp->getTimestamp(i));
         case 4: return double2string(pp->getEnergyCost(i));
+        case 5: return long2string(pp->getPriority());
         default: return "";
     }
 }
@@ -526,6 +545,7 @@ bool EnergyMsgDescriptor::setFieldValueAsString(void *object, int field, int i, 
         case 2: pp->setHopCount(string2long(value)); return true;
         case 3: pp->setTimestamp(i,string2long(value)); return true;
         case 4: pp->setEnergyCost(i,string2double(value)); return true;
+        case 5: pp->setPriority(string2long(value)); return true;
         default: return false;
     }
 }

@@ -28,6 +28,7 @@
  *     int hopCount = 0;
  *     long timestamp[60];
  *     double energyCost[60];
+ *     int priority;
  * }
  * </pre>
  */
@@ -39,6 +40,7 @@ class EnergyMsg : public ::omnetpp::cMessage
     int hopCount;
     long timestamp[60];
     double energyCost[60];
+    int priority;
 
   private:
     void copy(const EnergyMsg& other);
@@ -69,6 +71,8 @@ class EnergyMsg : public ::omnetpp::cMessage
     virtual unsigned int getEnergyCostArraySize() const;
     virtual double getEnergyCost(unsigned int k) const;
     virtual void setEnergyCost(unsigned int k, double energyCost);
+    virtual int getPriority() const;
+    virtual void setPriority(int priority);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const EnergyMsg& obj) {obj.parsimPack(b);}
