@@ -6,12 +6,13 @@
 #include <fstream>
 #include <iostream>
 #include "energy_m.h"
-#define MINUTE_MILLISECOND 60000
-#define ENERGYMATRIX_ROW 24     // Number of message chunks
-#define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
 
 using namespace omnetpp;
 using namespace std;
+
+#define MINUTE_MILLISECOND 60000
+#define ENERGYMATRIX_ROW 24     // Number of message chunks
+#define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
 
 class User : public cSimpleModule
 {
