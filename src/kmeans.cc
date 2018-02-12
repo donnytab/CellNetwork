@@ -18,7 +18,7 @@ protected:
     double** generateCentroids(int k);
     double* joinGroup(double centroids[][]);
     double* calculateCenterPoint(double** pointSet[][]);
-//    double** updateCentroids();
+    double** updateCentroids(double centroidIndexGroup[], int k);
 };
 
 Kmeans::Kmeans() {
@@ -88,6 +88,38 @@ double* Kmenas::calculateCenterPoint(double** pointSet[][]) {
         newCentroid[i] = (double)sum/num;
     }
     return newCentroid;
+}
+
+double** Kmeans::updateCentroids(double centroidIndexGroup[], int k) {
+    int num = sizeof(pointSet)/sizeof(pointSet[0]);
+    int* groupDataCount = new int [k];
+    double** newCentroids = new double* [k];
+
+    for(ink i =0; i<k; i++) {
+        newCentroids[i] = new double [DELTA_MATRIX_COLUMN];
+        groupDataCount = 0;
+    }
+
+    for(int i=0; i<k; i++) {
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            newCentroids[i][j] = 0;
+        }
+    }
+
+    for(int i=0; i<num; i++) {
+        int groupIndex = centroidIndexGroup[i];
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            newCentroids[groupIndex][j] += deltaMatrix[i][j];
+        }
+        groupDataCount[groupIndex] += 1;
+    }
+
+    for(int i=0; i<k; i++) {
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            newCentroids[i][j] = (double)newCentroids[i][j]/groupDataCount[i];
+        }
+    }
+    return newCentroids;
 }
 
 
