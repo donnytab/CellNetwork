@@ -1,11 +1,12 @@
 #include <math.h>
 #include <cstdlib>
+#include <stdio.h>
 #include <limits>
 
 using namespace std;
 
 #define DELTA_MATRIX_ROW 24     // Number of message chunks
-#define DELTA_MATRIX_COLUMN 60      // Granularity for each chunk
+#define DELTA_MATRIX_COLUMN 59      // Granularity for each chunk
 #define SHORTEST_MAX numeric_limits<double>::max()
 
 class Kmeans {
@@ -13,12 +14,13 @@ private:
     double** deltaMatrix;   // Two dimensional array for delta cost
 protected:
     Kmeans();
-    void loadData(double energyData[][]);
-    double calculateDistance(double array1[], double array2[]) const;
+    void loadData(double** energyData);
+    double static calculateDistance(double array1[], double array2[], int dimension);
     double** generateCentroids(int k);
-    double* joinGroup(double centroids[][]);
-    double* calculateCenterPoint(double** pointSet[][]);
-    double** updateCentroids(double centroidIndexGroup[], int k);
+    int* joinGroup(double** centroids, int k);
+    double** updateCentroids(int centroidIndexGroup[], int k);
+    int* generateKmeansClusters(double** energyData, int k);
+    bool isEqual(int* group1, int* group2, int size);
 };
 
 Kmeans::Kmeans() {
@@ -26,15 +28,29 @@ Kmeans::Kmeans() {
     for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         deltaMatrix[i] = new double [DELTA_MATRIX_COLUMN];
     }
+
+    // Initialization
+    for(int i=0; i<DELTA_MATRIX_ROW; i++) {
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            deltaMatrix[i][j] = 0;
+        }
+    }
 }
 
-void Kmeans::loadData(double energyData[][]) {
-
+void Kmeans::loadData(double** energyData) {
+    for(int i=0; i<DELTA_MATRIX_ROW; i++) {
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            deltaMatrix[i][j] = fabs(energyData[i][j+1] - energyData[i][j]);
+        }
+    }
 }
 
-double Kmeans::calculateDistance(double m[], double n[]) const {
+/*
+ * @param dimension  size of array m.
+ *
+ */
+double Kmeans::calculateDistance(double m[], double n[], int dimension) {
     double squareSum = 0;
-    int dimension = sizeof(m)/sizeof(m[0]);
     for(int i=0; i<dimension; i++) {
         double diff = m[i] - n[i];
         squareSum += diff * diff;
@@ -42,7 +58,7 @@ double Kmeans::calculateDistance(double m[], double n[]) const {
     return sqrt(squareSum);
 }
 
-double** Kmeans::generateCentroid(int k) {
+double** Kmeans::generateCentroids(int k) {
     int RandIndex = 0;
     double** centroids = new double* [k];
     for(int i=0; i<k; i++) {
@@ -55,18 +71,18 @@ double** Kmeans::generateCentroid(int k) {
             max = deltaMatrix[i][j] > max ? deltaMatrix[i][j] : max;
             min = deltaMatrix[i][j] < min ? deltaMatrix[i][j] : min;
         }
-        centroids[RandIndex++][i] = rand() % (max-min+1) + min;
+        centroids[RandIndex++][i] = rand() % (int)(max-min+1) + min;
     }
     return centroids;
 }
 
-double* Kmeans::joinGroup(double centroids[][], int k) {
-    double* centroidIndexGroups = new double[DELTA_MATRIX_ROW];
+int* Kmeans::joinGroup(double** centroids, int k) {
+    int* centroidIndexGroups = new int[DELTA_MATRIX_ROW];
     for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         double shortest = SHORTEST_MAX;
         int shortest_index = 0;
         for(int j=0; j<k; j++) {
-            double dist = calculateDistance(deltaMatrix[i], centroids[j]);
+            double dist = calculateDistance(deltaMatrix[i], centroids[j], DELTA_MATRIX_COLUMN);
             if(dist < shortest) {
                 shortest = dist;
                 shortest_index = j;
@@ -77,36 +93,29 @@ double* Kmeans::joinGroup(double centroids[][], int k) {
     return centroidIndexGroups;
 }
 
-double* Kmenas::calculateCenterPoint(double** pointSet[][]) {
-    int num = sizeof(pointSet)/sizeof(pointSet[0]);
-    double* newCentroid = new double [num];
-    for(int i=0; i<DELTA_MATRIX_COLUMN; i++) {
-        double sum = 0;
-        for(int j=0; j<num; j++) {
-            sum += pointSet[j][i];
-        }
-        newCentroid[i] = (double)sum/num;
-    }
-    return newCentroid;
-}
-
-double** Kmeans::updateCentroids(double centroidIndexGroup[], int k) {
-    int num = sizeof(pointSet)/sizeof(pointSet[0]);
+/*
+ * @param dimension  size of array centroidIndexGroup[].
+ *
+ */
+double** Kmeans::updateCentroids(int* centroidIndexGroup, int k) {
+//    int num = sizeof(centroidIndexGroup)/sizeof(centroidIndexGroup[0]);
     int* groupDataCount = new int [k];
     double** newCentroids = new double* [k];
 
-    for(ink i =0; i<k; i++) {
+    for(int i =0; i<k; i++) {
         newCentroids[i] = new double [DELTA_MATRIX_COLUMN];
         groupDataCount = 0;
     }
 
+    // Initialization
     for(int i=0; i<k; i++) {
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
             newCentroids[i][j] = 0;
         }
     }
 
-    for(int i=0; i<num; i++) {
+    // Calculate new centroids
+    for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         int groupIndex = centroidIndexGroup[i];
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
             newCentroids[groupIndex][j] += deltaMatrix[i][j];
@@ -122,4 +131,35 @@ double** Kmeans::updateCentroids(double centroidIndexGroup[], int k) {
     return newCentroids;
 }
 
+int* Kmeans::generateKmeansClusters(double** energyData, int k) {
+    double** centroid = new double* [k];
+    for(int i=0; i<k; i++) {
+        centroid[i] = new double [DELTA_MATRIX_COLUMN];
+    }
+
+    int* group = new int [DELTA_MATRIX_ROW];
+    int* prevGroup = new int [DELTA_MATRIX_ROW];
+    for(int i=0; i<DELTA_MATRIX_ROW; i++) {
+        group[i] = 0;
+        prevGroup[i] = 0;
+    }
+
+    loadData(energyData);
+    group = joinGroup(generateCentroids(k), k);
+    while(!isEqual(group, prevGroup, DELTA_MATRIX_ROW)) {
+        centroid = updateCentroids(group ,k);
+        prevGroup = group;
+        group = joinGroup(centroid, k);
+    }
+    return group;
+}
+
+bool Kmeans::isEqual(int* group1, int* group2, int size) {
+    for(int i=0; i<size; i++) {
+        if(group1[i] != group2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
 

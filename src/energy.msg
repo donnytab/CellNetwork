@@ -6,5 +6,5 @@ message EnergyMsg
     int hopCount = 0;
     long timestamp[60];
     double energyCost[60];
-    int priority;
+    int priority;   // Kmeans k
 }
