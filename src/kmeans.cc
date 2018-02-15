@@ -1,27 +1,4 @@
-#include <math.h>
-#include <cstdlib>
-#include <stdio.h>
-#include <limits>
-
-using namespace std;
-
-#define DELTA_MATRIX_ROW 24     // Number of message chunks
-#define DELTA_MATRIX_COLUMN 59      // Granularity for each chunk
-#define SHORTEST_MAX numeric_limits<double>::max()
-
-class Kmeans {
-private:
-    double** deltaMatrix;   // Two dimensional array for delta cost
-protected:
-    Kmeans();
-    void loadData(double** energyData);
-    double static calculateDistance(double array1[], double array2[], int dimension);
-    double** generateCentroids(int k);
-    int* joinGroup(double** centroids, int k);
-    double** updateCentroids(int centroidIndexGroup[], int k);
-    int* generateKmeansClusters(double** energyData, int k);
-    bool isEqual(int* group1, int* group2, int size);
-};
+#include "kmeans.h"
 
 Kmeans::Kmeans() {
     deltaMatrix = new double* [DELTA_MATRIX_ROW];
@@ -131,7 +108,7 @@ double** Kmeans::updateCentroids(int* centroidIndexGroup, int k) {
     return newCentroids;
 }
 
-int* Kmeans::generateKmeansClusters(double** energyData, int k) {
+double* Kmeans::generateKmeansClusters(double** energyData, int k) {
     double** centroid = new double* [k];
     for(int i=0; i<k; i++) {
         centroid[i] = new double [DELTA_MATRIX_COLUMN];
@@ -151,7 +128,8 @@ int* Kmeans::generateKmeansClusters(double** energyData, int k) {
         prevGroup = group;
         group = joinGroup(centroid, k);
     }
-    return group;
+
+    return getRootMeanSquare(centroid, k);
 }
 
 bool Kmeans::isEqual(int* group1, int* group2, int size) {
@@ -163,3 +141,12 @@ bool Kmeans::isEqual(int* group1, int* group2, int size) {
     return true;
 }
 
+double* Kmeans::getRootMeanSquare(double** centroids, int k) {
+    double* rootMeanSquare = new double [k];
+    for(int i=0; i<k; i++) {
+        for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
+            rootMeanSquare[i] = sqrt(centroids[i][j] * centroids[i][j]);
+        }
+    }
+    return rootMeanSquare;
+}
