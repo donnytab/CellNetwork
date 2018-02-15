@@ -36,30 +36,37 @@ double Kmeans::calculateDistance(double m[], double n[], int dimension) {
 }
 
 double** Kmeans::generateCentroids(int k) {
-    int RandIndex = 0;
     double** centroids = new double* [k];
     for(int i=0; i<k; i++) {
         centroids[i] = new double [DELTA_MATRIX_COLUMN];
     }
+
+    // Choose the max & min values for each column
     for(int i=0; i<DELTA_MATRIX_COLUMN; i++) {
         double max = 0;
         double min = 0;
         for(int j=0; j<DELTA_MATRIX_ROW; j++) {
-            max = deltaMatrix[i][j] > max ? deltaMatrix[i][j] : max;
-            min = deltaMatrix[i][j] < min ? deltaMatrix[i][j] : min;
+            max = deltaMatrix[j][i] > max ? deltaMatrix[j][i] : max;
+            min = deltaMatrix[j][i] < min ? deltaMatrix[j][i] : min;
         }
-        centroids[RandIndex++][i] = rand() % (int)(max-min+1) + min;
+
+        // Generate random value between max & min
+        for(int RandIndex=0; RandIndex<k; RandIndex++) {
+            centroids[RandIndex][i] = rand() % ((int)(max-min+1)) + min;
+        }
     }
     return centroids;
 }
 
 int* Kmeans::joinGroup(double** centroids, int k) {
-    int* centroidIndexGroups = new int[DELTA_MATRIX_ROW];
+    int* centroidIndexGroups = new int [DELTA_MATRIX_ROW];
     for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         double shortest = SHORTEST_MAX;
         int shortest_index = 0;
         for(int j=0; j<k; j++) {
             double dist = calculateDistance(deltaMatrix[i], centroids[j], DELTA_MATRIX_COLUMN);
+
+            // Find the closest centroid for each chunk
             if(dist < shortest) {
                 shortest = dist;
                 shortest_index = j;
@@ -81,7 +88,7 @@ double** Kmeans::updateCentroids(int* centroidIndexGroup, int k) {
 
     for(int i =0; i<k; i++) {
         newCentroids[i] = new double [DELTA_MATRIX_COLUMN];
-        groupDataCount = 0;
+        groupDataCount[i] = 0;
     }
 
     // Initialization
@@ -100,6 +107,7 @@ double** Kmeans::updateCentroids(int* centroidIndexGroup, int k) {
         groupDataCount[groupIndex] += 1;
     }
 
+    // Calculate the average values of the new centroid
     for(int i=0; i<k; i++) {
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
             newCentroids[i][j] = (double)newCentroids[i][j]/groupDataCount[i];
@@ -123,6 +131,8 @@ double* Kmeans::generateKmeansClusters(double** energyData, int k) {
 
     loadData(energyData);
     group = joinGroup(generateCentroids(k), k);
+
+    // Generate clusters until the group indexes remain stable
     while(!isEqual(group, prevGroup, DELTA_MATRIX_ROW)) {
         centroid = updateCentroids(group ,k);
         prevGroup = group;
