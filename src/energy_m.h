@@ -21,6 +21,7 @@
 /**
  * Class generated from <tt>src/energy.msg:3</tt> by nedtool.
  * <pre>
+ * // Energy Message from users to picocells and macrocells
  * message EnergyMsg
  * {
  *     int source; // User port

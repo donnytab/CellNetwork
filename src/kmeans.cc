@@ -154,9 +154,11 @@ bool Kmeans::isEqual(int* group1, int* group2, int size) {
 double* Kmeans::getRootMeanSquare(double** centroids, int k) {
     double* rootMeanSquare = new double [k];
     for(int i=0; i<k; i++) {
+        double sum = 0;
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
-            rootMeanSquare[i] = sqrt(centroids[i][j] * centroids[i][j]);
+            sum += centroids[i][j] * centroids[i][j];
         }
+        rootMeanSquare[i] = sqrt(sum);
     }
     return rootMeanSquare;
 }

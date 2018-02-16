@@ -30,11 +30,18 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/src/kmeans.o $O/src/macrocell.o $O/src/picocell.o $O/src/user.o $O/src/energy_m.o
+OBJS = \
+    $O/src/kmeans.o \
+    $O/src/macrocell.o \
+    $O/src/picocell.o \
+    $O/src/user.o \
+    $O/src/energy_m.o \
+    $O/src/priority_m.o
 
 # Message files
 MSGFILES = \
-    src/energy.msg
+    src/energy.msg \
+    src/priority.msg
 
 # SM files
 SMFILES =

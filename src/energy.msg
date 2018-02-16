@@ -1,4 +1,4 @@
-
+// Energy Message from users to picocells and macrocells
 message EnergyMsg
 {
     int source; // User port

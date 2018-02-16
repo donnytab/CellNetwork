@@ -33,7 +33,7 @@ network MicrogridNetwork
     submodules:
         macro[1]: MacroCell;
         pico[4]: PicoCell;
-        user[10]: User;
+        user[12]: User;
     connections:
         user[0].gate++ <--> Channel <--> pico[0].gate++;
         user[1].gate++ <--> Channel <--> pico[0].gate++;
@@ -43,8 +43,10 @@ network MicrogridNetwork
         user[5].gate++ <--> Channel <--> pico[1].gate++;
         user[6].gate++ <--> Channel <--> pico[2].gate++;
         user[7].gate++ <--> Channel <--> pico[2].gate++;
-        user[8].gate++ <--> Channel <--> pico[3].gate++;
+        user[8].gate++ <--> Channel <--> pico[2].gate++;
         user[9].gate++ <--> Channel <--> pico[3].gate++;
+        user[10].gate++ <--> Channel <--> pico[3].gate++;
+        user[11].gate++ <--> Channel <--> pico[3].gate++;
         macro[0].gate++ <--> Channel <--> pico[0].gate++;
         macro[0].gate++ <--> Channel <--> pico[1].gate++;
         macro[0].gate++ <--> Channel <--> pico[2].gate++;

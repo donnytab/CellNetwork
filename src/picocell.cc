@@ -5,9 +5,12 @@
 #include <string.h>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <algorithm>
 #include <omnetpp.h>
 #include "kmeans.h"
 #include "energy_m.h"
+#include "priority_m.h"
 
 using namespace omnetpp;
 using namespace std;
@@ -15,6 +18,7 @@ using namespace std;
 #define PRIORITY_LEVEL 3    // K value for Kmeans algorithm
 #define TRAINING_SAMPLE_COUNT 50
 #define MATRIX_COLUMN 1440      // Granularity for each training sample
+#define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
 
 class MsgCompare {
 public:
@@ -42,6 +46,7 @@ private:
     virtual void handleMessage(cMessage *msg) override;
     void loadData();
     void trainModel();
+    int evaluatePriority(EnergyMsg *msg);
 };
 
 Define_Module(PicoCell);
@@ -61,13 +66,21 @@ void PicoCell::initialize()
 void PicoCell::handleMessage(cMessage *msg)
 {
     EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
-
-    eMsg->setPriority(eMsg->getSource());
+    PriorityMsg *pMsg = new PriorityMsg();
 
     unique_lock<mutex> lck(mtx);
     if(eMsg) {
+        pMsg->setSource(getIndex());
+        pMsg->setDestination(eMsg->getSource());
+        pMsg->setPriority(evaluatePriority(eMsg));
+
         energyQueue.push(eMsg);
-        bubble("PUSH!");
+
+//        bubble("PUSH!");
+        ostringstream s;
+        s << modelCentroids[2];
+        bubble(s.str().c_str());
+
         conVar.notify_one();
     }
 
@@ -115,4 +128,28 @@ void PicoCell::loadData() {
 
 void PicoCell::trainModel() {
     modelCentroids = kmeans.generateKmeansClusters(trainingMatrix, PRIORITY_LEVEL);
+    sort(modelCentroids, modelCentroids+PRIORITY_LEVEL);
+}
+
+int PicoCell::evaluatePriority(EnergyMsg *msg) {
+    double rms, sum = 0;
+    double minDiff = SHORTEST_MAX;
+    int priority;
+
+    // Get delta value & Calculate root mean square
+    for(int i=0; i<ENERGYMATRIX_COLUMN-1; i++) {
+        double delta = msg->getEnergyCost(i+1) - msg->getEnergyCost(i);
+        sum += delta * delta;
+    }
+
+    rms = sqrt(sum);
+
+    for(int j=0; j<PRIORITY_LEVEL; j++) {
+        if(abs(rms - modelCentroids[j]) < minDiff) {
+            minDiff = abs(rms - modelCentroids[j]);
+            priority = j;
+        }
+    }
+
+    return priority;
 }

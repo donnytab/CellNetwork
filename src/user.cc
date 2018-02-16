@@ -18,6 +18,7 @@ class User : public cSimpleModule
 {
 private:
     static double** energyMatrix;
+    int priority;
 protected:
 //    virtual EnergyMsg* generateMessage();
     virtual void generateMessage();
@@ -52,22 +53,22 @@ void User::handleMessage(cMessage *msg)
 //        sleep(MINUTE_MILLISECOND);
         EnergyMsg *ttmsg = check_and_cast<EnergyMsg *>(msg);
 
-        if (ttmsg->getDestination() == getIndex()) {
-            // Message arrived.
-            EV << "Message " << ttmsg << " arrived after " << ttmsg->getHopCount() << " hops.\n";
-            bubble("ARRIVED, starting new one!");
-            delete ttmsg;
-
-            // Generate another one.
-            EV << "Generating another message: ";
-//            EnergyMsg *newmsg = generateMessage();
-//            EV << newmsg << endl;
-//            forwardMessage(newmsg);
-        }
-        else {
-            // We need to forward the message.
+//        if (ttmsg->getDestination() == getIndex()) {
+//            // Message arrived.
+//            EV << "Message " << ttmsg << " arrived after " << ttmsg->getHopCount() << " hops.\n";
+//            bubble("ARRIVED, starting new one!");
+//            delete ttmsg;
+//
+//            // Generate another one.
+//            EV << "Generating another message: ";
+////            EnergyMsg *newmsg = generateMessage();
+////            EV << newmsg << endl;
+////            forwardMessage(newmsg);
+//        }
+//        else {
+//            // We need to forward the message.
             forwardMessage(ttmsg);
-        }
+//        }
 }
 
 //EnergyMsg *User::generateMessage()
