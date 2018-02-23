@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include "energy_m.h"
+#include "priority_m.h"
 
 using namespace omnetpp;
 using namespace std;
@@ -34,6 +35,7 @@ double** User::energyMatrix;
 
 void User::initialize()
 {
+    priority = -1;
     energyMatrix = new double* [24];
     for(int i=0; i<24; i++) {
         energyMatrix[i] = new double [60];
@@ -43,35 +45,15 @@ void User::initialize()
     loadDataset();
 
     generateMessage();
-
-//    EnergyMsg *msg = generateMessage();
-//    scheduleAt(0.0, msg);
 }
 
 void User::handleMessage(cMessage *msg)
 {
-//        sleep(MINUTE_MILLISECOND);
-        EnergyMsg *ttmsg = check_and_cast<EnergyMsg *>(msg);
-
-//        if (ttmsg->getDestination() == getIndex()) {
-//            // Message arrived.
-//            EV << "Message " << ttmsg << " arrived after " << ttmsg->getHopCount() << " hops.\n";
-//            bubble("ARRIVED, starting new one!");
-//            delete ttmsg;
-//
-//            // Generate another one.
-//            EV << "Generating another message: ";
-////            EnergyMsg *newmsg = generateMessage();
-////            EV << newmsg << endl;
-////            forwardMessage(newmsg);
-//        }
-//        else {
-//            // We need to forward the message.
-            forwardMessage(ttmsg);
-//        }
+//    PriorityMsg *pMsg = check_and_cast<PriorityMsg *>(msg);
+//    priority = pMsg->getPriority();
+    forwardMessage(check_and_cast<EnergyMsg *>(msg));
 }
 
-//EnergyMsg *User::generateMessage()
 void User::generateMessage()
 {
     for(int i=0; i<ENERGYMATRIX_ROW; i++) {
@@ -82,6 +64,9 @@ void User::generateMessage()
         EnergyMsg *msg = new EnergyMsg(msgname);
         for(int j=0; j<ENERGYMATRIX_COLUMN; j++) {
             msg->setEnergyCost(j, energyMatrix[i][j]);
+        }
+        if(priority != -1) {
+            msg->setPriority(priority);
         }
         msg->setSource(src);
         msg->setDestination(dest);

@@ -42,6 +42,7 @@ private:
   protected:
 //    virtual EnergyMsg *generateMessage();
     virtual void forwardMessage(EnergyMsg *msg);
+    virtual void forwardPriorityMessage(PriorityMsg *pMsg, int gateId);
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
     void loadData();
@@ -73,6 +74,7 @@ void PicoCell::handleMessage(cMessage *msg)
         pMsg->setSource(getIndex());
         pMsg->setDestination(eMsg->getSource());
         pMsg->setPriority(evaluatePriority(eMsg));
+//        bubble(to_string(evaluatePriority(eMsg)).c_str());
 
         energyQueue.push(eMsg);
 
@@ -83,11 +85,15 @@ void PicoCell::handleMessage(cMessage *msg)
 
         conVar.notify_one();
     }
+    // CBR, VBR, RT-VBR
 
     while(!energyQueue.empty()) {
         forwardMessage(energyQueue.top());
         energyQueue.pop();
     }
+
+    forwardPriorityMessage(pMsg, pMsg->getDestination());
+
 }
 
 void PicoCell::forwardMessage(EnergyMsg *msg)
@@ -101,6 +107,12 @@ void PicoCell::forwardMessage(EnergyMsg *msg)
 
     EV << "Forwarding message " << msg << " on gate[" << k << "]\n";
     send(msg, "gate$o", 0);
+}
+
+void PicoCell::forwardPriorityMessage(PriorityMsg *pMsg, int gateId)
+{
+    EV << "Forwarding message" << pMsg << " on gate[" << gateId <<"]\n";
+//    send(pMsg, "gate$o", gateId);
 }
 
 void PicoCell::loadData() {

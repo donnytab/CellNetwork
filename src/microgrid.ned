@@ -5,7 +5,7 @@ simple PicoCell
     parameters:
         @display("i=device/antennatower");
     gates:
-        inout gate[];
+        inout gate[1];
 }
 
 simple MacroCell
@@ -21,7 +21,7 @@ simple User
 	parameters:
 	    @display("i=device/cellphone;is=vs");
 	gates:
-	    inout gate[];
+	    inout gate[1];
 }
 
 network MicrogridNetwork
@@ -35,6 +35,10 @@ network MicrogridNetwork
         pico[4]: PicoCell;
         user[12]: User;
     connections:
+        macro[0].gate++ <--> Channel <--> pico[0].gate[0];
+        macro[0].gate++ <--> Channel <--> pico[1].gate[0];
+        macro[0].gate++ <--> Channel <--> pico[2].gate[0];
+        macro[0].gate++ <--> Channel <--> pico[3].gate[0];
         user[0].gate++ <--> Channel <--> pico[0].gate++;
         user[1].gate++ <--> Channel <--> pico[0].gate++;
         user[2].gate++ <--> Channel <--> pico[0].gate++;
@@ -47,8 +51,4 @@ network MicrogridNetwork
         user[9].gate++ <--> Channel <--> pico[3].gate++;
         user[10].gate++ <--> Channel <--> pico[3].gate++;
         user[11].gate++ <--> Channel <--> pico[3].gate++;
-        macro[0].gate++ <--> Channel <--> pico[0].gate++;
-        macro[0].gate++ <--> Channel <--> pico[1].gate++;
-        macro[0].gate++ <--> Channel <--> pico[2].gate++;
-        macro[0].gate++ <--> Channel <--> pico[3].gate++;
 }
