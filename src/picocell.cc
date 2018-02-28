@@ -34,13 +34,14 @@ public:
 class PicoCell : public cSimpleModule
 {
 private:
-    priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
+//    priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
+    cQueue energyQueue;
     double** trainingMatrix;
     double* modelCentroids;
     mutex mtx;
     condition_variable conVar;
     Kmeans kmeans;
-  protected:
+protected:
 //    virtual EnergyMsg *generateMessage();
     virtual void forwardMessage(EnergyMsg *msg);
     virtual void forwardPriorityMessage(PriorityMsg *pMsg);
@@ -49,12 +50,15 @@ private:
     void loadData();
     void trainModel();
     int evaluatePriority(EnergyMsg *msg);
+public:
+    static int comparePriority(cObject* a, cObject* b);
 };
 
 Define_Module(PicoCell);
 
 void PicoCell::initialize()
 {
+    energyQueue = cQueue("energyQueue", comparePriority);
     kmeans = Kmeans();
     trainingMatrix = new double* [TRAINING_SAMPLE_COUNT];
     for(int i=0; i<TRAINING_SAMPLE_COUNT; i++) {
@@ -77,7 +81,7 @@ void PicoCell::handleMessage(cMessage *msg)
         pMsg->setPriority(evaluatePriority(eMsg));
 //        bubble(to_string(evaluatePriority(eMsg)).c_str());
 
-        energyQueue.push(eMsg);
+        energyQueue.insert(eMsg);
 
 //        bubble("PUSH!");
         ostringstream s;
@@ -88,9 +92,8 @@ void PicoCell::handleMessage(cMessage *msg)
     }
     // CBR, VBR, RT-VBR
 
-    while(!energyQueue.empty()) {
-        forwardMessage(energyQueue.top());
-        energyQueue.pop();
+    while(!energyQueue.isEmpty()) {
+        forwardMessage((EnergyMsg*)energyQueue.pop());
     }
 
 //    if(eMsg->getPriority() == -1) {
@@ -161,4 +164,11 @@ int PicoCell::evaluatePriority(EnergyMsg *msg) {
     }
 
     return priority;
+}
+
+int PicoCell::comparePriority(cObject* a, cObject* b) {
+    EnergyMsg *aMsg = check_and_cast<EnergyMsg*>(a);
+    EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
+
+    return aMsg->getPriority() < bMsg->getPriority() ? 1 : -1;
 }
