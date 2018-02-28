@@ -38,7 +38,7 @@ void MacroCell::handleMessage(cMessage *msg)
     }
     else {
         // We need to forward the message.
-        forwardMessage(ttmsg);
+//        forwardMessage(ttmsg);
     }
 }
 

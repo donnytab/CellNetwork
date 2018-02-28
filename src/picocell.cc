@@ -19,6 +19,7 @@ using namespace std;
 #define TRAINING_SAMPLE_COUNT 50
 #define MATRIX_COLUMN 1440      // Granularity for each training sample
 #define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
+#define PICOCELL_GATE_TOTAL 26    // 25 users + 1 macrocell
 
 class MsgCompare {
 public:
@@ -42,7 +43,7 @@ private:
   protected:
 //    virtual EnergyMsg *generateMessage();
     virtual void forwardMessage(EnergyMsg *msg);
-    virtual void forwardPriorityMessage(PriorityMsg *pMsg, int gateId);
+    virtual void forwardPriorityMessage(PriorityMsg *pMsg);
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
     void loadData();
@@ -92,27 +93,23 @@ void PicoCell::handleMessage(cMessage *msg)
         energyQueue.pop();
     }
 
-    forwardPriorityMessage(pMsg, pMsg->getDestination());
-
+//    if(eMsg->getPriority() == -1) {
+//        forwardPriorityMessage(pMsg);
+//    }
 }
 
 void PicoCell::forwardMessage(EnergyMsg *msg)
 {
-//    // Increment hop count.
-//    msg->setHopCount(msg->getHopCount()+1);
-
-    // Same routing as before: random gate.
-    int n = gateSize("gate");
-    int k = intuniform(0, n-1);
-
-    EV << "Forwarding message " << msg << " on gate[" << k << "]\n";
+//    int n = gateSize("gate");
     send(msg, "gate$o", 0);
+    EV << "Forwarding Energy message " << msg << " to Macrocell\n";
 }
 
-void PicoCell::forwardPriorityMessage(PriorityMsg *pMsg, int gateId)
+void PicoCell::forwardPriorityMessage(PriorityMsg *pMsg)
 {
-    EV << "Forwarding message" << pMsg << " on gate[" << gateId <<"]\n";
-//    send(pMsg, "gate$o", gateId);
+    int userGateId = (pMsg->getDestination())%PICOCELL_GATE_TOTAL;
+    send(pMsg, "gate$o", userGateId);
+    EV << "Forwarding priority message" << pMsg << " on gate[" << userGateId <<"]\n";
 }
 
 void PicoCell::loadData() {
