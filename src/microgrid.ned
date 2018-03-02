@@ -1,6 +1,21 @@
 package src;
 
-simple PicoCell
+module PicoCell
+{
+    parameters:
+        @display("i=device/antennatower");
+    gates:
+        inout gate[1];
+    submodules:
+        queue: Fifo;
+        sink: PicoSink;
+    connections:
+        queue.fifo <--> gate[0];
+        sink.gate[0] <--> queue.fifo;
+        sink.gate[0] <--> gate[0];
+}
+
+simple PicoSink
 {
     parameters:
         @display("i=device/antennatower");
@@ -39,8 +54,9 @@ simple Fifo
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
         @statistic[queueingTime](title="queueing time at dequeue";unit=s;record=vector,mean,max;interpolationmode=none);
     gates:
-        input in;
-        output out;
+//        input in;
+//        output out;
+        inout fifo;
 }
 
 network MicrogridNetwork
