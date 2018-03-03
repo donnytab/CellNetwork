@@ -15,7 +15,7 @@
 
 using namespace omnetpp;
 
-namespace fifo {
+//namespace fifo {
 
 /**
  * Abstract base class for single-server queues. Subclasses should
@@ -46,6 +46,6 @@ class AbstractFifo : public cSimpleModule
     virtual void endService(cMessage *msg) = 0;
 };
 
-}; //namespace
+//}; //namespace
 
 #endif

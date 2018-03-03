@@ -10,7 +10,7 @@
 
 #include "AbstractFifo.h"
 
-namespace fifo {
+//namespace fifo {
 
 AbstractFifo::AbstractFifo()
 {
@@ -72,5 +72,5 @@ void AbstractFifo::handleMessage(cMessage *msg)
     }
 }
 
-}; //namespace
+//}; //namespace
 

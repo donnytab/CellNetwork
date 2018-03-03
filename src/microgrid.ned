@@ -1,26 +1,13 @@
 package src;
 
-module PicoCell
-{
-    parameters:
-        @display("i=device/antennatower");
-    gates:
-        inout gate[1];
-    submodules:
-        queue: Fifo;
-        sink: PicoSink;
-    connections:
-        queue.fifo <--> gate[0];
-        sink.gate[0] <--> queue.fifo;
-        sink.gate[0] <--> gate[0];
-}
-
 simple PicoSink
 {
     parameters:
         @display("i=device/antennatower");
     gates:
-        inout gate[1];
+//        inout gate[1];
+        input in[];
+        output out[];
 }
 
 simple MacroCell
@@ -28,7 +15,9 @@ simple MacroCell
 	parameters:
 	    @display("i=device/antennatower;is=l");
 	gates:
-	    inout gate[];
+//	    inout gate[];
+        input in[];
+//        output out[];
 }
 
 simple User
@@ -36,7 +25,9 @@ simple User
 	parameters:
 	    @display("i=device/cellphone;is=vs");
 	gates:
-	    inout gate[1];
+//	    inout gate[1];
+//        input in;
+        output out;
 }
 
 //
@@ -54,9 +45,28 @@ simple Fifo
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
         @statistic[queueingTime](title="queueing time at dequeue";unit=s;record=vector,mean,max;interpolationmode=none);
     gates:
-//        input in;
-//        output out;
-        inout fifo;
+        input in[];
+        output out[];
+//        inout fifo;
+}
+
+module PicoCell
+{
+    parameters:
+        @display("i=device/antennatower");
+    gates:
+//        inout gate[1];
+        input in[];
+        output out[];
+    submodules:
+        queue: Fifo;
+        sink: PicoSink;
+    connections:
+        for i=0..sizeof(in)-1 {
+            in[i] --> sink.in++;
+            sink.out++ --> queue.in++;
+            queue.out++ --> out[i];
+        }
 }
 
 network MicrogridNetwork
@@ -73,22 +83,25 @@ network MicrogridNetwork
         pico[4]: PicoCell;
         user[12]: User;
     connections:
-        macro[0].gate++ <--> Channel <--> pico[0].gate[0];
-        macro[0].gate++ <--> Channel <--> pico[1].gate[0];
-        macro[0].gate++ <--> Channel <--> pico[2].gate[0];
-        macro[0].gate++ <--> Channel <--> pico[3].gate[0];
-        user[0].gate++ <--> Channel <--> pico[0].gate++;
-        user[1].gate++ <--> Channel <--> pico[0].gate++;
-        user[2].gate++ <--> Channel <--> pico[0].gate++;
-        user[3].gate++ <--> Channel <--> pico[1].gate++;
-        user[4].gate++ <--> Channel <--> pico[1].gate++;
-        user[5].gate++ <--> Channel <--> pico[1].gate++;
-        user[6].gate++ <--> Channel <--> pico[2].gate++;
-        user[7].gate++ <--> Channel <--> pico[2].gate++;
-        user[8].gate++ <--> Channel <--> pico[2].gate++;
-        user[9].gate++ <--> Channel <--> pico[3].gate++;
-        user[10].gate++ <--> Channel <--> pico[3].gate++;
-        user[11].gate++ <--> Channel <--> pico[3].gate++;
+        user[0].out --> Channel --> pico[0].in++;
+        user[1].out --> Channel --> pico[0].in++;
+        user[2].out --> Channel --> pico[0].in++;
+        user[3].out --> Channel --> pico[1].in++;
+        user[4].out --> Channel --> pico[1].in++;
+        user[5].out --> Channel --> pico[1].in++;
+        user[6].out --> Channel --> pico[2].in++;
+        user[7].out --> Channel --> pico[2].in++;
+        user[8].out --> Channel --> pico[2].in++;
+        user[9].out --> Channel --> pico[3].in++;
+        user[10].out --> Channel --> pico[3].in++;
+        user[11].out --> Channel --> pico[3].in++;
+        
+        for k=0..2 {
+            macro[0].in++ <-- Channel <-- pico[0].out++;
+            macro[0].in++ <-- Channel <-- pico[1].out++;
+            macro[0].in++ <-- Channel <-- pico[2].out++;
+            macro[0].in++ <-- Channel <-- pico[3].out++;
+        }
         
 //        user[0].gate++ <--> Channel <--> pico[0].gate++;
 //        user[1].gate++ <--> Channel <--> pico[0].gate++;

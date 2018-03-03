@@ -31,7 +31,7 @@ public:
     }
 };
 
-class PicoCell : public cSimpleModule
+class PicoSink : public cSimpleModule
 {
 private:
 //    priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
@@ -54,9 +54,9 @@ public:
     static int comparePriority(cObject* a, cObject* b);
 };
 
-Define_Module(PicoCell);
+Define_Module(PicoSink);
 
-void PicoCell::initialize()
+void PicoSink::initialize()
 {
     energyQueue = cQueue("energyQueue", comparePriority);
     kmeans = Kmeans();
@@ -69,7 +69,7 @@ void PicoCell::initialize()
     trainModel();
 }
 
-void PicoCell::handleMessage(cMessage *msg)
+void PicoSink::handleMessage(cMessage *msg)
 {
     EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
     PriorityMsg *pMsg = new PriorityMsg();
@@ -101,21 +101,21 @@ void PicoCell::handleMessage(cMessage *msg)
 //    }
 }
 
-void PicoCell::forwardMessage(EnergyMsg *msg)
+void PicoSink::forwardMessage(EnergyMsg *msg)
 {
 //    int n = gateSize("gate");
     send(msg, "gate$o", 0);
     EV << "Forwarding Energy message " << msg << " to Macrocell\n";
 }
 
-void PicoCell::forwardPriorityMessage(PriorityMsg *pMsg)
+void PicoSink::forwardPriorityMessage(PriorityMsg *pMsg)
 {
     int userGateId = (pMsg->getDestination())%PICOCELL_GATE_TOTAL;
     send(pMsg, "gate$o", userGateId);
     EV << "Forwarding priority message" << pMsg << " on gate[" << userGateId <<"]\n";
 }
 
-void PicoCell::loadData() {
+void PicoSink::loadData() {
     string row;
     char delimeter = ',';
     string datasetDir = "/Users/downson/omnetpp-5.2/samples/CellNetwork/res/trainingset";
@@ -138,12 +138,12 @@ void PicoCell::loadData() {
     }
 }
 
-void PicoCell::trainModel() {
+void PicoSink::trainModel() {
     modelCentroids = kmeans.generateKmeansClusters(trainingMatrix, PRIORITY_LEVEL);
     sort(modelCentroids, modelCentroids+PRIORITY_LEVEL);
 }
 
-int PicoCell::evaluatePriority(EnergyMsg *msg) {
+int PicoSink::evaluatePriority(EnergyMsg *msg) {
     double rms, sum = 0;
     double minDiff = SHORTEST_MAX;
     int priority;
@@ -166,7 +166,7 @@ int PicoCell::evaluatePriority(EnergyMsg *msg) {
     return priority;
 }
 
-int PicoCell::comparePriority(cObject* a, cObject* b) {
+int PicoSink::comparePriority(cObject* a, cObject* b) {
     EnergyMsg *aMsg = check_and_cast<EnergyMsg*>(a);
     EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
 

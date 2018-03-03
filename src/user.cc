@@ -80,11 +80,11 @@ void User::forwardMessage(EnergyMsg *msg)
     msg->setHopCount(msg->getHopCount()+1);
 
     // Same routing as before: random gate.
-    int n = gateSize("gate");
-    int k = intuniform(0, n-1);
+//    int n = gateSize("out");
+//    int k = intuniform(0, n-1);
 
-    EV << "Forwarding message " << msg << " on gate[" << k << "]\n";
-    send(msg, "gate$o", k);
+    EV << "Forwarding message " << msg << " on gate[" << 0 << "]\n";
+    send(msg, "out");
 }
 
 void User::loadDataset() {

@@ -32,9 +32,10 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc, .msg and .sm files
 OBJS = \
     $O/src/AbstractFifo.o \
+    $O/src/Fifo.o \
     $O/src/kmeans.o \
     $O/src/macrocell.o \
-    $O/src/picocell.o \
+    $O/src/picosink.o \
     $O/src/user.o \
     $O/src/energy_m.o \
     $O/src/priority_m.o
