@@ -8,6 +8,7 @@ simple PicoSink
 //        inout gate[1];
         input in[];
         output out[];
+//        output priorityOut[];
 }
 
 simple MacroCell
@@ -36,7 +37,7 @@ simple User
 simple Fifo
 {
     parameters:
-        volatile double serviceTime @unit(s);
+//        volatile double serviceTime @unit(s);
         @display("i=block/queue;q=queue");
         @signal[qlen](type="int");
         @signal[busy](type="bool");
@@ -63,6 +64,7 @@ module PicoCell
         sink: PicoSink;
     connections:
         for i=0..sizeof(in)-1 {
+//        for i=0..2 {
             in[i] --> sink.in++;
             sink.out++ --> queue.in++;
             queue.out++ --> out[i];

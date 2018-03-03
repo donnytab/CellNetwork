@@ -24,7 +24,7 @@
  * // Energy Message from users to picocells and macrocells
  * message EnergyMsg
  * {
- *     int source; // User port
+ *     int source; // User port, from 0
  *     int destination;
  *     int hopCount = 0;
  *     long timestamp[60];

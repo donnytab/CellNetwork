@@ -17,7 +17,8 @@ Define_Module(Fifo);
 simtime_t Fifo::startService(cMessage *msg)
 {
     EV << "Starting service of " << msg->getName() << endl;
-    return par("serviceTime");
+//    return par("serviceTime");
+    return simTime();
 }
 
 void Fifo::endService(cMessage *msg)

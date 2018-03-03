@@ -1,4 +1,4 @@
-out/clang-release//src/picocell.o: src/picocell.cc \
+out/clang-debug//src/picosink.o: src/picosink.cc \
   /Users/downson/omnetpp-5.2/include/omnetpp.h src/kmeans.h \
   src/energy_m.h src/priority_m.h
 

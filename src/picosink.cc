@@ -103,8 +103,9 @@ void PicoSink::handleMessage(cMessage *msg)
 
 void PicoSink::forwardMessage(EnergyMsg *msg)
 {
-//    int n = gateSize("gate");
-    send(msg, "gate$o", 0);
+    int n = gateSize("in");
+    int sinkOutGateId = msg->getSource()%n;
+    send(msg, "out", sinkOutGateId);
     EV << "Forwarding Energy message " << msg << " to Macrocell\n";
 }
 
