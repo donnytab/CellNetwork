@@ -1,13 +1,3 @@
-//
-// This file is part of an OMNeT++/OMNEST simulation example.
-//
-// Copyright (C) 1992-2008 Andras Varga
-//
-// This file is distributed WITHOUT ANY WARRANTY. See the file
-// `license' for details on this and other legal matters.
-//
-
-
 #include "AbstractFifo.h"
 
 //namespace fifo {
@@ -50,8 +40,8 @@ void AbstractFifo::handleMessage(cMessage *msg)
             msgServiced = (cMessage *) queue.pop();
             emit(qlenSignal, queue.length());
             emit(queueingTimeSignal, simTime() - msgServiced->getTimestamp());
-            simtime_t serviceTime = startService( msgServiced );
-            scheduleAt( simTime()+serviceTime, endServiceMsg );
+//            simtime_t serviceTime = startService( msgServiced );
+//            scheduleAt( simTime()+serviceTime, endServiceMsg );
         }
     }
     else if (!msgServiced)

@@ -20,6 +20,7 @@ class User : public cSimpleModule
 private:
     static double** energyMatrix;
     int priority;
+    const char* ENERGY_MESSAGE_TYPE;
 protected:
 //    virtual EnergyMsg* generateMessage();
     virtual void generateMessage();
@@ -36,6 +37,7 @@ double** User::energyMatrix;
 void User::initialize()
 {
     priority = -1;
+    ENERGY_MESSAGE_TYPE = "energyMessage";
     energyMatrix = new double* [24];
     for(int i=0; i<24; i++) {
         energyMatrix[i] = new double [60];
@@ -68,6 +70,7 @@ void User::generateMessage()
         if(priority != -1) {
             msg->setPriority(priority);
         }
+        msg->setName(ENERGY_MESSAGE_TYPE);
         msg->setSource(src);
         msg->setDestination(dest);
         scheduleAt(0.0+i*0.5, msg);

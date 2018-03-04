@@ -43,22 +43,20 @@ private:
     Kmeans kmeans;
 protected:
 //    virtual EnergyMsg *generateMessage();
-    virtual void forwardMessage(EnergyMsg *msg);
+    virtual void forwardEnergyMessage(cMessage *msg);
     virtual void forwardPriorityMessage(PriorityMsg *pMsg);
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
     void loadData();
     void trainModel();
     int evaluatePriority(EnergyMsg *msg);
-public:
-    static int comparePriority(cObject* a, cObject* b);
 };
 
 Define_Module(PicoSink);
 
 void PicoSink::initialize()
 {
-    energyQueue = cQueue("energyQueue", comparePriority);
+//    energyQueue = cQueue("energyQueue", comparePriority);
     kmeans = Kmeans();
     trainingMatrix = new double* [TRAINING_SAMPLE_COUNT];
     for(int i=0; i<TRAINING_SAMPLE_COUNT; i++) {
@@ -71,42 +69,30 @@ void PicoSink::initialize()
 
 void PicoSink::handleMessage(cMessage *msg)
 {
-    EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
-    PriorityMsg *pMsg = new PriorityMsg();
-
     unique_lock<mutex> lck(mtx);
-    if(eMsg) {
-        pMsg->setSource(getIndex());
-        pMsg->setDestination(eMsg->getSource());
-        pMsg->setPriority(evaluatePriority(eMsg));
-//        bubble(to_string(evaluatePriority(eMsg)).c_str());
 
-        energyQueue.insert(eMsg);
-
-//        bubble("PUSH!");
-        ostringstream s;
-        s << modelCentroids[2];
-        bubble(s.str().c_str());
-
-        conVar.notify_one();
-    }
-    // CBR, VBR, RT-VBR
-
-    while(!energyQueue.isEmpty()) {
-        forwardMessage((EnergyMsg*)energyQueue.pop());
+    if(!strcmp(msg->getName(), "energyMessage")) {
+        forwardEnergyMessage(msg);
+        EV << "GET!" <<endl;
     }
 
-//    if(eMsg->getPriority() == -1) {
+//    if(!eMsg && eMsg->getPriority() == -1) {
+//        PriorityMsg *pMsg = new PriorityMsg();
+//        pMsg->setSource(getIndex());
+//        pMsg->setDestination(eMsg->getSource());
+//        pMsg->setPriority(evaluatePriority(eMsg));
 //        forwardPriorityMessage(pMsg);
 //    }
+    conVar.notify_one();
 }
 
-void PicoSink::forwardMessage(EnergyMsg *msg)
+void PicoSink::forwardEnergyMessage(cMessage *msg)
 {
+    EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
     int n = gateSize("in");
-    int sinkOutGateId = msg->getSource()%n;
+    int sinkOutGateId = eMsg->getSource()%n;
     send(msg, "out", sinkOutGateId);
-    EV << "Forwarding Energy message " << msg << " to Macrocell\n";
+    EV << "Forwarding picosink Energy message " << msg << " to Macrocell\n";
 }
 
 void PicoSink::forwardPriorityMessage(PriorityMsg *pMsg)
@@ -167,9 +153,9 @@ int PicoSink::evaluatePriority(EnergyMsg *msg) {
     return priority;
 }
 
-int PicoSink::comparePriority(cObject* a, cObject* b) {
-    EnergyMsg *aMsg = check_and_cast<EnergyMsg*>(a);
-    EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
-
-    return aMsg->getPriority() < bMsg->getPriority() ? 1 : -1;
-}
+//int PicoSink::comparePriority(cObject* a, cObject* b) {
+//    EnergyMsg *aMsg = check_and_cast<EnergyMsg*>(a);
+//    EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
+//
+//    return aMsg->getPriority() < bMsg->getPriority() ? 1 : -1;
+//}
