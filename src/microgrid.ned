@@ -9,6 +9,7 @@ simple PicoSink
         input in[];
         output out[];
 //        output priorityOut[];
+//        output priorityOut[];
 }
 
 simple MacroCell

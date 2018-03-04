@@ -20,6 +20,7 @@ using namespace std;
 #define MATRIX_COLUMN 1440      // Granularity for each training sample
 #define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
 #define PICOCELL_GATE_TOTAL 26    // 25 users + 1 macrocell
+#define PRIORITY_UPDATE_INTERVAL 3.0
 
 class MsgCompare {
 public:
@@ -36,6 +37,8 @@ class PicoSink : public cSimpleModule
 private:
 //    priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
     cQueue energyQueue;
+    cMessage* updatePriorityMsg;
+    bool hasUpdatedPriority;
     double** trainingMatrix;
     double* modelCentroids;
     mutex mtx;
@@ -43,7 +46,7 @@ private:
     Kmeans kmeans;
 protected:
 //    virtual EnergyMsg *generateMessage();
-    virtual void forwardEnergyMessage(cMessage *msg);
+    virtual void forwardEnergyMessage(EnergyMsg* eMsg);
     virtual void forwardPriorityMessage(PriorityMsg *pMsg);
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
@@ -57,6 +60,8 @@ Define_Module(PicoSink);
 void PicoSink::initialize()
 {
 //    energyQueue = cQueue("energyQueue", comparePriority);
+    updatePriorityMsg = new cMessage("updatePriorityMsg");
+    hasUpdatedPriority = false;     // false: to update priority
     kmeans = Kmeans();
     trainingMatrix = new double* [TRAINING_SAMPLE_COUNT];
     for(int i=0; i<TRAINING_SAMPLE_COUNT; i++) {
@@ -70,25 +75,43 @@ void PicoSink::initialize()
 void PicoSink::handleMessage(cMessage *msg)
 {
     unique_lock<mutex> lck(mtx);
+    int priority = -1;
+    EnergyMsg *eMsg;
 
-    if(!strcmp(msg->getName(), "energyMessage")) {
-        forwardEnergyMessage(msg);
-        EV << "GET!" <<endl;
+    if(msg == updatePriorityMsg) {
+        hasUpdatePriority = false;
+        return;
     }
 
-//    if(!eMsg && eMsg->getPriority() == -1) {
-//        PriorityMsg *pMsg = new PriorityMsg();
-//        pMsg->setSource(getIndex());
-//        pMsg->setDestination(eMsg->getSource());
-//        pMsg->setPriority(evaluatePriority(eMsg));
-//        forwardPriorityMessage(pMsg);
-//    }
+    if(!strcmp(msg->getName(), "energyMessage")) {
+        eMsg = check_and_cast<EnergyMsg*>(msg);
+    }
+
+    if(!hasUpdatedPriority && eMsg) {
+        // Create priority message
+        PriorityMsg *pMsg = new PriorityMsg();
+        priority = evaluatePriority(eMsg);
+        pMsg->setSource(getIndex());
+        pMsg->setDestination(eMsg->getSource());
+        pMsg->setPriority(priority);
+
+        // Forward priority back to users
+        forwardPriorityMessage(pMsg);
+
+        hasUpdatedPriority = true;
+        scheduleAt(simTime()+PRIORITY_UPDATE_INTERVAL, updatePriorityMsg);
+    }
+
+    // Set priority of the current energy message before forwarding
+    eMsg->setPreviousEventNumber(priority);
+    forwardEnergyMessage(eMsg);
+
     conVar.notify_one();
 }
 
-void PicoSink::forwardEnergyMessage(cMessage *msg)
+void PicoSink::forwardEnergyMessage(EnergyMsg* eMsg)
 {
-    EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
+    cMessage* msg = check_and_cast<cMessage*>(eMsg);
     int n = gateSize("in");
     int sinkOutGateId = eMsg->getSource()%n;
     send(msg, "out", sinkOutGateId);
@@ -98,7 +121,7 @@ void PicoSink::forwardEnergyMessage(cMessage *msg)
 void PicoSink::forwardPriorityMessage(PriorityMsg *pMsg)
 {
     int userGateId = (pMsg->getDestination())%PICOCELL_GATE_TOTAL;
-    send(pMsg, "gate$o", userGateId);
+    send(pMsg, "priorityOut", userGateId);
     EV << "Forwarding priority message" << pMsg << " on gate[" << userGateId <<"]\n";
 }
 
