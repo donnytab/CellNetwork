@@ -53,7 +53,9 @@ void User::handleMessage(cMessage *msg)
 {
 //    PriorityMsg *pMsg = check_and_cast<PriorityMsg *>(msg);
 //    priority = pMsg->getPriority();
-    forwardMessage(check_and_cast<EnergyMsg *>(msg));
+    if(!strcmp(msg->getName(), "energyMessage")) {
+        forwardMessage(check_and_cast<EnergyMsg *>(msg));
+    }
 }
 
 void User::generateMessage()
@@ -63,7 +65,7 @@ void User::generateMessage()
         int src = getIndex();
         int dest = intuniform(0, getVectorSize()-2);    // TODO
 //        sprintf(msgname, "user %d to picocell %d", src, dest);
-        EnergyMsg *msg = new EnergyMsg;
+        EnergyMsg *msg = new EnergyMsg("energyMessage");
         for(int j=0; j<ENERGYMATRIX_COLUMN; j++) {
             msg->setEnergyCost(j, energyMatrix[i][j]);
         }

@@ -79,7 +79,7 @@ void PicoSink::handleMessage(cMessage *msg)
     EnergyMsg *eMsg;
 
     if(msg == updatePriorityMsg) {
-        hasUpdatePriority = false;
+        hasUpdatedPriority = false;
         return;
     }
 
@@ -120,7 +120,9 @@ void PicoSink::forwardEnergyMessage(EnergyMsg* eMsg)
 
 void PicoSink::forwardPriorityMessage(PriorityMsg *pMsg)
 {
-    int userGateId = (pMsg->getDestination())%PICOCELL_GATE_TOTAL;
+//    int userGateId = (pMsg->getDestination())%PICOCELL_GATE_TOTAL;
+    int n = gateSize("priorityOut");
+    int userGateId = (pMsg->getDestination())%n;
     send(pMsg, "priorityOut", userGateId);
     EV << "Forwarding priority message" << pMsg << " on gate[" << userGateId <<"]\n";
 }

@@ -8,8 +8,7 @@ simple PicoSink
 //        inout gate[1];
         input in[];
         output out[];
-//        output priorityOut[];
-//        output priorityOut[];
+        output priorityOut[];
 }
 
 simple MacroCell
@@ -28,7 +27,7 @@ simple User
 	    @display("i=device/cellphone;is=vs");
 	gates:
 //	    inout gate[1];
-//        input in;
+        input in;
         output out;
 }
 
@@ -60,6 +59,7 @@ module PicoCell
 //        inout gate[1];
         input in[];
         output out[];
+        output priorityOut[];
     submodules:
         queue: Fifo;
         sink: PicoSink;
@@ -69,6 +69,10 @@ module PicoCell
             in[i] --> sink.in++;
             sink.out++ --> queue.in++;
             queue.out++ --> out[i];
+        }
+        
+        for j=0..sizeof(priorityOut)-1 {
+            sink.priorityOut++ --> priorityOut++;
         }
 }
 
@@ -98,6 +102,19 @@ network MicrogridNetwork
         user[9].out --> Channel --> pico[3].in++;
         user[10].out --> Channel --> pico[3].in++;
         user[11].out --> Channel --> pico[3].in++;
+        
+        user[0].in <-- Channel <-- pico[0].priorityOut++;
+        user[1].in <-- Channel <-- pico[0].priorityOut++;
+        user[2].in <-- Channel <-- pico[0].priorityOut++;
+        user[3].in <-- Channel <-- pico[1].priorityOut++;
+        user[4].in <-- Channel <-- pico[1].priorityOut++;
+        user[5].in <-- Channel <-- pico[1].priorityOut++;
+        user[6].in <-- Channel <-- pico[2].priorityOut++;
+        user[7].in <-- Channel <-- pico[2].priorityOut++;
+        user[8].in <-- Channel <-- pico[2].priorityOut++;
+        user[9].in <-- Channel <-- pico[3].priorityOut++;
+        user[10].in <-- Channel <-- pico[3].priorityOut++;
+        user[11].in <-- Channel <-- pico[3].priorityOut++;
         
         for k=0..2 {
             macro[0].in++ <-- Channel <-- pico[0].out++;
