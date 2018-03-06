@@ -36,6 +36,7 @@ class Fifo : public cSimpleModule
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void forwardMessage(cMessage *msg);
+    virtual void checkQueue(simtime_t time);
     virtual simtime_t startService(cMessage *msg);
     virtual void endService();
 };

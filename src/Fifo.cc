@@ -31,6 +31,17 @@ void Fifo::handleMessage(cMessage *msg) {
         emit(qlenSignal, energyQueue.getLength());
     }
 
+    // Dequeue periodically
+//    if(!isScheduled) {
+//        scheduleAt(simTime()+serviceTime, endServiceMsg);
+//        isScheduled = true;
+//        emit(busySignal, 1);
+//    }
+    checkQueue(serviceTime);
+}
+
+void Fifo::checkQueue(simtime_t time) {
+    // Dequeue periodically
     if(!isScheduled) {
         scheduleAt(simTime()+serviceTime, endServiceMsg);
         isScheduled = true;
@@ -48,7 +59,7 @@ void Fifo::endService()
 {
 //    EV << "Completed service of " << msg->getName() << endl;
 //    send( msg, "out" );
-    while(!energyQueue.isEmpty()) {
+    if(!energyQueue.isEmpty()) {
         cMessage* msg = check_and_cast<cMessage*>(energyQueue.pop());
 
         // TODO: traffic generator
@@ -57,6 +68,8 @@ void Fifo::endService()
         emit(queueingTimeSignal, simTime() - msg->getTimestamp());
 
         forwardMessage(msg);
+
+//        checkQueue()
     }
 
     isScheduled = false;
