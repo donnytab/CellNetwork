@@ -186,6 +186,8 @@ EnergyMsg::EnergyMsg(const char *name, short kind) : ::omnetpp::cMessage(name,ki
     this->hopCount = 0;
     for (unsigned int i=0; i<60; i++)
         this->timestamp[i] = 0;
+    this->enqueueTimestamp = 0;
+    this->dequeueTimestamp = 0;
     for (unsigned int i=0; i<60; i++)
         this->energyCost[i] = 0;
     this->priority = 0;
@@ -215,6 +217,8 @@ void EnergyMsg::copy(const EnergyMsg& other)
     this->hopCount = other.hopCount;
     for (unsigned int i=0; i<60; i++)
         this->timestamp[i] = other.timestamp[i];
+    this->enqueueTimestamp = other.enqueueTimestamp;
+    this->dequeueTimestamp = other.dequeueTimestamp;
     for (unsigned int i=0; i<60; i++)
         this->energyCost[i] = other.energyCost[i];
     this->priority = other.priority;
@@ -227,6 +231,8 @@ void EnergyMsg::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->destination);
     doParsimPacking(b,this->hopCount);
     doParsimArrayPacking(b,this->timestamp,60);
+    doParsimPacking(b,this->enqueueTimestamp);
+    doParsimPacking(b,this->dequeueTimestamp);
     doParsimArrayPacking(b,this->energyCost,60);
     doParsimPacking(b,this->priority);
 }
@@ -238,6 +244,8 @@ void EnergyMsg::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->destination);
     doParsimUnpacking(b,this->hopCount);
     doParsimArrayUnpacking(b,this->timestamp,60);
+    doParsimUnpacking(b,this->enqueueTimestamp);
+    doParsimUnpacking(b,this->dequeueTimestamp);
     doParsimArrayUnpacking(b,this->energyCost,60);
     doParsimUnpacking(b,this->priority);
 }
@@ -277,16 +285,36 @@ unsigned int EnergyMsg::getTimestampArraySize() const
     return 60;
 }
 
-long EnergyMsg::getTimestamp(unsigned int k) const
+::omnetpp::simtime_t EnergyMsg::getTimestamp(unsigned int k) const
 {
     if (k>=60) throw omnetpp::cRuntimeError("Array of size 60 indexed by %lu", (unsigned long)k);
     return this->timestamp[k];
 }
 
-void EnergyMsg::setTimestamp(unsigned int k, long timestamp)
+void EnergyMsg::setTimestamp(unsigned int k, ::omnetpp::simtime_t timestamp)
 {
     if (k>=60) throw omnetpp::cRuntimeError("Array of size 60 indexed by %lu", (unsigned long)k);
     this->timestamp[k] = timestamp;
+}
+
+::omnetpp::simtime_t EnergyMsg::getEnqueueTimestamp() const
+{
+    return this->enqueueTimestamp;
+}
+
+void EnergyMsg::setEnqueueTimestamp(::omnetpp::simtime_t enqueueTimestamp)
+{
+    this->enqueueTimestamp = enqueueTimestamp;
+}
+
+::omnetpp::simtime_t EnergyMsg::getDequeueTimestamp() const
+{
+    return this->dequeueTimestamp;
+}
+
+void EnergyMsg::setDequeueTimestamp(::omnetpp::simtime_t dequeueTimestamp)
+{
+    this->dequeueTimestamp = dequeueTimestamp;
 }
 
 unsigned int EnergyMsg::getEnergyCostArraySize() const
@@ -381,7 +409,7 @@ const char *EnergyMsgDescriptor::getProperty(const char *propertyname) const
 int EnergyMsgDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 6+basedesc->getFieldCount() : 6;
+    return basedesc ? 8+basedesc->getFieldCount() : 8;
 }
 
 unsigned int EnergyMsgDescriptor::getFieldTypeFlags(int field) const
@@ -397,10 +425,12 @@ unsigned int EnergyMsgDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISARRAY | FD_ISEDITABLE,
+        FD_ISEDITABLE,
+        FD_ISEDITABLE,
         FD_ISARRAY | FD_ISEDITABLE,
         FD_ISEDITABLE,
     };
-    return (field>=0 && field<6) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<8) ? fieldTypeFlags[field] : 0;
 }
 
 const char *EnergyMsgDescriptor::getFieldName(int field) const
@@ -416,10 +446,12 @@ const char *EnergyMsgDescriptor::getFieldName(int field) const
         "destination",
         "hopCount",
         "timestamp",
+        "enqueueTimestamp",
+        "dequeueTimestamp",
         "energyCost",
         "priority",
     };
-    return (field>=0 && field<6) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<8) ? fieldNames[field] : nullptr;
 }
 
 int EnergyMsgDescriptor::findField(const char *fieldName) const
@@ -430,8 +462,10 @@ int EnergyMsgDescriptor::findField(const char *fieldName) const
     if (fieldName[0]=='d' && strcmp(fieldName, "destination")==0) return base+1;
     if (fieldName[0]=='h' && strcmp(fieldName, "hopCount")==0) return base+2;
     if (fieldName[0]=='t' && strcmp(fieldName, "timestamp")==0) return base+3;
-    if (fieldName[0]=='e' && strcmp(fieldName, "energyCost")==0) return base+4;
-    if (fieldName[0]=='p' && strcmp(fieldName, "priority")==0) return base+5;
+    if (fieldName[0]=='e' && strcmp(fieldName, "enqueueTimestamp")==0) return base+4;
+    if (fieldName[0]=='d' && strcmp(fieldName, "dequeueTimestamp")==0) return base+5;
+    if (fieldName[0]=='e' && strcmp(fieldName, "energyCost")==0) return base+6;
+    if (fieldName[0]=='p' && strcmp(fieldName, "priority")==0) return base+7;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -447,11 +481,13 @@ const char *EnergyMsgDescriptor::getFieldTypeString(int field) const
         "int",
         "int",
         "int",
-        "long",
+        "simtime_t",
+        "simtime_t",
+        "simtime_t",
         "double",
         "int",
     };
-    return (field>=0 && field<6) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<8) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **EnergyMsgDescriptor::getFieldPropertyNames(int field) const
@@ -491,7 +527,7 @@ int EnergyMsgDescriptor::getFieldArraySize(void *object, int field) const
     EnergyMsg *pp = (EnergyMsg *)object; (void)pp;
     switch (field) {
         case 3: return 60;
-        case 4: return 60;
+        case 6: return 60;
         default: return 0;
     }
 }
@@ -523,9 +559,11 @@ std::string EnergyMsgDescriptor::getFieldValueAsString(void *object, int field, 
         case 0: return long2string(pp->getSource());
         case 1: return long2string(pp->getDestination());
         case 2: return long2string(pp->getHopCount());
-        case 3: return long2string(pp->getTimestamp(i));
-        case 4: return double2string(pp->getEnergyCost(i));
-        case 5: return long2string(pp->getPriority());
+        case 3: return simtime2string(pp->getTimestamp(i));
+        case 4: return simtime2string(pp->getEnqueueTimestamp());
+        case 5: return simtime2string(pp->getDequeueTimestamp());
+        case 6: return double2string(pp->getEnergyCost(i));
+        case 7: return long2string(pp->getPriority());
         default: return "";
     }
 }
@@ -543,9 +581,11 @@ bool EnergyMsgDescriptor::setFieldValueAsString(void *object, int field, int i, 
         case 0: pp->setSource(string2long(value)); return true;
         case 1: pp->setDestination(string2long(value)); return true;
         case 2: pp->setHopCount(string2long(value)); return true;
-        case 3: pp->setTimestamp(i,string2long(value)); return true;
-        case 4: pp->setEnergyCost(i,string2double(value)); return true;
-        case 5: pp->setPriority(string2long(value)); return true;
+        case 3: pp->setTimestamp(i,string2simtime(value)); return true;
+        case 4: pp->setEnqueueTimestamp(string2simtime(value)); return true;
+        case 5: pp->setDequeueTimestamp(string2simtime(value)); return true;
+        case 6: pp->setEnergyCost(i,string2double(value)); return true;
+        case 7: pp->setPriority(string2long(value)); return true;
         default: return false;
     }
 }

@@ -27,7 +27,9 @@
  *     int source; // User port, from 0
  *     int destination;
  *     int hopCount = 0;
- *     long timestamp[60];
+ *     simtime_t timestamp[60];
+ *     simtime_t enqueueTimestamp;
+ *     simtime_t dequeueTimestamp;
  *     double energyCost[60];
  *     int priority;   // Kmeans k
  * }
@@ -39,7 +41,9 @@ class EnergyMsg : public ::omnetpp::cMessage
     int source;
     int destination;
     int hopCount;
-    long timestamp[60];
+    ::omnetpp::simtime_t timestamp[60];
+    ::omnetpp::simtime_t enqueueTimestamp;
+    ::omnetpp::simtime_t dequeueTimestamp;
     double energyCost[60];
     int priority;
 
@@ -67,8 +71,12 @@ class EnergyMsg : public ::omnetpp::cMessage
     virtual int getHopCount() const;
     virtual void setHopCount(int hopCount);
     virtual unsigned int getTimestampArraySize() const;
-    virtual long getTimestamp(unsigned int k) const;
-    virtual void setTimestamp(unsigned int k, long timestamp);
+    virtual ::omnetpp::simtime_t getTimestamp(unsigned int k) const;
+    virtual void setTimestamp(unsigned int k, ::omnetpp::simtime_t timestamp);
+    virtual ::omnetpp::simtime_t getEnqueueTimestamp() const;
+    virtual void setEnqueueTimestamp(::omnetpp::simtime_t enqueueTimestamp);
+    virtual ::omnetpp::simtime_t getDequeueTimestamp() const;
+    virtual void setDequeueTimestamp(::omnetpp::simtime_t dequeueTimestamp);
     virtual unsigned int getEnergyCostArraySize() const;
     virtual double getEnergyCost(unsigned int k) const;
     virtual void setEnergyCost(unsigned int k, double energyCost);

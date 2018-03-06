@@ -7,8 +7,15 @@ Define_Module(Fifo);
 void Fifo::initialize() {
     serviceTime = QUEUE_PROCESS_INTERVAL;
     isScheduled = false;
+
     energyQueue = cQueue("energyQueue", comparePriority);
     endServiceMsg = new cMessage("endServiceMsg");
+
+    qlenSignal = registerSignal("queueLength");
+    busySignal = registerSignal("busy");
+    queueingTimeSignal = registerSignal("queueingTime");
+    emit(qlenSignal, energyQueue.getLength());
+    emit(busySignal, 0);
 }
 
 void Fifo::handleMessage(cMessage *msg) {
@@ -19,12 +26,15 @@ void Fifo::handleMessage(cMessage *msg) {
 
     EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
     if(eMsg) {
+        eMsg->setEnqueueTimestamp(simTime());
         energyQueue.insert(eMsg);
+        emit(qlenSignal, energyQueue.getLength());
     }
 
     if(!isScheduled) {
         scheduleAt(simTime()+serviceTime, endServiceMsg);
         isScheduled = true;
+        emit(busySignal, 1);
     }
 }
 
@@ -40,9 +50,17 @@ void Fifo::endService()
 //    send( msg, "out" );
     while(!energyQueue.isEmpty()) {
         cMessage* msg = check_and_cast<cMessage*>(energyQueue.pop());
+
+        // TODO: traffic generator
+
+        emit(qlenSignal, energyQueue.getLength());
+        emit(queueingTimeSignal, simTime() - msg->getTimestamp());
+
         forwardMessage(msg);
     }
+
     isScheduled = false;
+    emit(busySignal, 0);
 
     EV << "End Service at " << simTime() <<endl;
 }
