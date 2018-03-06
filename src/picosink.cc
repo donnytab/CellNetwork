@@ -38,7 +38,8 @@ private:
 //    priority_queue<EnergyMsg*, vector<EnergyMsg*>, MsgCompare> energyQueue;
     cQueue energyQueue;
     cMessage* updatePriorityMsg;
-    bool hasUpdatedPriority;
+//    bool hasUpdatedPriority;
+    int hasUpdatedPriority;
     double** trainingMatrix;
     double* modelCentroids;
     mutex mtx;
@@ -61,7 +62,8 @@ void PicoSink::initialize()
 {
 //    energyQueue = cQueue("energyQueue", comparePriority);
     updatePriorityMsg = new cMessage("updatePriorityMsg");
-    hasUpdatedPriority = false;     // false: to update priority
+//    hasUpdatedPriority = false;     // false: to update priority
+    hasUpdatedPriority = 0;     // 0: to update priority
     kmeans = Kmeans();
     trainingMatrix = new double* [TRAINING_SAMPLE_COUNT];
     for(int i=0; i<TRAINING_SAMPLE_COUNT; i++) {
@@ -79,7 +81,7 @@ void PicoSink::handleMessage(cMessage *msg)
     EnergyMsg *eMsg;
 
     if(msg == updatePriorityMsg) {
-        hasUpdatedPriority = false;
+        hasUpdatedPriority = 0;
         return;
     }
 
@@ -87,19 +89,24 @@ void PicoSink::handleMessage(cMessage *msg)
         eMsg = check_and_cast<EnergyMsg*>(msg);
     }
 
-    if(!hasUpdatedPriority && eMsg) {
+    if(hasUpdatedPriority<PRIORITY_LEVEL && eMsg) {
         // Create priority message
         PriorityMsg *pMsg = new PriorityMsg();
         priority = evaluatePriority(eMsg);
         pMsg->setSource(getIndex());
         pMsg->setDestination(eMsg->getSource());
+//        EV << "GET sink INDEX: " << eMsg->getSource() <<endl;
         pMsg->setPriority(priority);
 
         // Forward priority back to users
         forwardPriorityMessage(pMsg);
 
-        hasUpdatedPriority = true;
-        scheduleAt(simTime()+PRIORITY_UPDATE_INTERVAL, updatePriorityMsg);
+//        hasUpdatedPriority = true;
+        hasUpdatedPriority++;
+
+        if(!updatePriorityMsg->isScheduled()) {
+            scheduleAt(simTime()+PRIORITY_UPDATE_INTERVAL, updatePriorityMsg);
+        }
     }
 
     // Set priority of the current energy message before forwarding
@@ -124,7 +131,7 @@ void PicoSink::forwardPriorityMessage(PriorityMsg *pMsg)
     int n = gateSize("priorityOut");
     int userGateId = (pMsg->getDestination())%n;
     send(pMsg, "priorityOut", userGateId);
-    EV << "Forwarding priority message" << pMsg << " on gate[" << userGateId <<"]\n";
+    EV << "Forwarding " << userGateId<< " priority message" << pMsg << " on gate[" << userGateId <<"]\n";
 }
 
 void PicoSink::loadData() {

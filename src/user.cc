@@ -61,10 +61,8 @@ void User::handleMessage(cMessage *msg)
 void User::generateMessage()
 {
     for(int i=0; i<ENERGYMATRIX_ROW; i++) {
-//        char msgname[30];
         int src = getIndex();
         int dest = intuniform(0, getVectorSize()-2);    // TODO
-//        sprintf(msgname, "user %d to picocell %d", src, dest);
         EnergyMsg *msg = new EnergyMsg("energyMessage");
         for(int j=0; j<ENERGYMATRIX_COLUMN; j++) {
             msg->setEnergyCost(j, energyMatrix[i][j]);
