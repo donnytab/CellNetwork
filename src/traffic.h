@@ -4,16 +4,21 @@
 /*
  * Definitions for different types of traffic time
  */
-#define DEQUEUE_TRAFFIC_TIME 1
-#define ENQUEUE_TRAFFIC_TIME 1
+#define DEQUEUE_TRAFFIC_TIME 0.2
+#define ENQUEUE_TRAFFIC_TIME 0.2
 
 #include <omnetpp.h>
 
 using namespace omnetpp;
 
-static class Traffic {
+class Traffic : public cSimpleModule {
 public:
-    void trafficGenerator(simtime_t trafficTime);
+    Traffic(){}
+    void trafficGenerator(simtime_t trafficTime, cMessage* msg);
 };
+
+//void Traffic::trafficGenerator(simtime_t trafficTime, cMessage* msg) {
+//    scheduleAt(simTime()+trafficTime, msg);
+//}
 
 #endif /* SRC_TRAFFIC_H_ */

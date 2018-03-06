@@ -3,10 +3,11 @@
 
 #include <omnetpp.h>
 #include "energy_m.h"
+#include "traffic.h"
 
 using namespace omnetpp;
 
-#define QUEUE_PROCESS_INTERVAL 1.0;
+#define QUEUE_PROCESS_INTERVAL 2.0;
 
 //namespace fifo {
 
@@ -21,8 +22,9 @@ class Fifo : public cSimpleModule
     static int comparePriority(cObject* a, cObject* b);
 
   protected:
-    cMessage *msgServiced;
+    cMessage *dequeueActionMsg;
     cMessage *endServiceMsg;    // self-message for processing delay
+    cMessage *regularQueueCheckMsg;
 //    cQueue queue;
     cQueue energyQueue;
 
@@ -32,13 +34,14 @@ class Fifo : public cSimpleModule
     simsignal_t queueingTimeSignal;
 
     bool isScheduled;
+//    int queueMsgIndex;
 
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual void forwardMessage(cMessage *msg);
     virtual void checkQueue(simtime_t time);
     virtual simtime_t startService(cMessage *msg);
-    virtual void endService();
+    virtual void dequeueMessage();
 };
 
 //}; //namespace

@@ -7,9 +7,12 @@ Define_Module(Fifo);
 void Fifo::initialize() {
     serviceTime = QUEUE_PROCESS_INTERVAL;
     isScheduled = false;
+//    int queueMsgIndex = 0;
 
     energyQueue = cQueue("energyQueue", comparePriority);
+    dequeueActionMsg = new cMessage("dequeueActionMsg");
     endServiceMsg = new cMessage("endServiceMsg");
+    regularQueueCheckMsg = new cMessage("regularQueueCheckMsg");
 
     qlenSignal = registerSignal("queueLength");
     busySignal = registerSignal("busy");
@@ -19,11 +22,41 @@ void Fifo::initialize() {
 }
 
 void Fifo::handleMessage(cMessage *msg) {
+    // Case for dequeue action message
+    if(msg == dequeueActionMsg) {
+        dequeueMessage();
+    }
+
+    // Case for high priority message
     if(msg == endServiceMsg) {
-        endService();
+        scheduleAt(simTime()+DEQUEUE_TRAFFIC_TIME, dequeueActionMsg);
         return;
     }
 
+    // Case for regular queue check
+    if(msg == regularQueueCheckMsg) {
+        if(!energyQueue.isEmpty()) {
+            dequeueMessage();
+//            ++queueMsgIndex;
+            scheduleAt(simTime()+DEQUEUE_TRAFFIC_TIME, regularQueueCheckMsg);
+        } else {
+            // Queue empty
+            isScheduled = false;
+//            queueMsgIndex = 0;
+            emit(busySignal, 0);
+        }
+        return;
+
+//        while(!energyQueue.isEmpty()) {
+//            ++msgIndex;
+//            scheduleAt(simTime()+DEQUEUE_TRAFFIC_TIME*msgIndex, dequeueActionMsg);
+//        }
+//        isScheduled = false;
+//        emit(busySignal, 0);
+//        return;
+    }
+
+    // Case for energy message
     EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
     if(eMsg) {
         eMsg->setEnqueueTimestamp(simTime());
@@ -41,11 +74,12 @@ void Fifo::handleMessage(cMessage *msg) {
 }
 
 void Fifo::checkQueue(simtime_t time) {
-    // Dequeue periodically
+    // Regular Message Dequeue
     if(!isScheduled) {
-        scheduleAt(simTime()+serviceTime, endServiceMsg);
+        scheduleAt(simTime()+time, regularQueueCheckMsg);
         isScheduled = true;
         emit(busySignal, 1);
+//        Traffic().trafficGenerator(time, endServiceMsg);
     }
 }
 
@@ -55,27 +89,26 @@ simtime_t Fifo::startService(cMessage *msg)
     return simTime();
 }
 
-void Fifo::endService()
+void Fifo::dequeueMessage()
 {
-//    EV << "Completed service of " << msg->getName() << endl;
-//    send( msg, "out" );
     if(!energyQueue.isEmpty()) {
         cMessage* msg = check_and_cast<cMessage*>(energyQueue.pop());
-
-        // TODO: traffic generator
 
         emit(qlenSignal, energyQueue.getLength());
         emit(queueingTimeSignal, simTime() - msg->getTimestamp());
 
         forwardMessage(msg);
 
-//        checkQueue()
+        // TODO: traffic generator
+//        checkQueue(DEQUEUE_TRAFFIC_TIME);
+//        scheduleAt(simTime()+time, endServiceMsg);
     }
+//    else {
+//        isScheduled = false;
+//        emit(busySignal, 0);
+//    }
 
-    isScheduled = false;
-    emit(busySignal, 0);
-
-    EV << "End Service at " << simTime() <<endl;
+    EV << "Dequeue Energy Message at " << simTime() <<endl;
 }
 
 void Fifo::forwardMessage(cMessage* msg) {
