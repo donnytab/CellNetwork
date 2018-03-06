@@ -17,15 +17,12 @@ using namespace omnetpp;
 class Fifo : public cSimpleModule
 {
   public:
-//    Fifo();
-//    ~Fifo();
     static int comparePriority(cObject* a, cObject* b);
 
   protected:
     cMessage *dequeueActionMsg;
-    cMessage *endServiceMsg;    // self-message for processing delay
+    cMessage *priorityMsgDequeueRequest;    // self-message for processing high priority messsage
     cMessage *regularQueueCheckMsg;
-//    cQueue queue;
     cQueue energyQueue;
 
     simtime_t serviceTime;
@@ -34,7 +31,6 @@ class Fifo : public cSimpleModule
     simsignal_t queueingTimeSignal;
 
     bool isScheduled;
-//    int queueMsgIndex;
 
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
