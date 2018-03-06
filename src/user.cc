@@ -56,6 +56,11 @@ void User::handleMessage(cMessage *msg)
     if(!strcmp(msg->getName(), "energyMessage")) {
         forwardMessage(check_and_cast<EnergyMsg *>(msg));
     }
+
+    if(!strcmp(msg->getName(), "priorityMessage")) {
+        PriorityMsg* pMsg = check_and_cast<PriorityMsg*>(msg);
+        priority = pMsg->getPriority();
+    }
 }
 
 void User::generateMessage()

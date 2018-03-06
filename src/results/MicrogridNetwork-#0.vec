@@ -1,14 +1,14 @@
 version 2
-run MicrogridNetwork-0-20180306-11:42:51-9728
+run MicrogridNetwork-0-20180306-12:13:14-9875
 attr configname MicrogridNetwork
-attr datetime 20180306-11:42:51
+attr datetime 20180306-12:13:14
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 9728
+attr processid 9875
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -28,19 +28,7 @@ vector 3 MicrogridNetwork.pico[3].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
 0	0	0	0
-0	25	0.1	1
-0	26	0.1	2
-0	27	0.1	3
 1	0	0	0
-1	28	0.1	1
-1	29	0.1	2
-1	30	0.1	3
 2	0	0	0
-2	31	0.1	1
-2	32	0.1	2
-2	33	0.1	3
 3	0	0	0
-3	34	0.1	1
-3	35	0.1	2
-3	36	0.1	3
 

@@ -93,10 +93,13 @@ void PicoSink::handleMessage(cMessage *msg)
         // Create priority message
         PriorityMsg *pMsg = new PriorityMsg();
         priority = evaluatePriority(eMsg);
+        pMsg->setName("priorityMessage");
         pMsg->setSource(getIndex());
         pMsg->setDestination(eMsg->getSource());
 //        EV << "GET sink INDEX: " << eMsg->getSource() <<endl;
-        pMsg->setPriority(priority);
+        if(priority >= 0) {
+            pMsg->setPriority(priority);
+        }
 
         // Forward priority back to users
         forwardPriorityMessage(pMsg);
