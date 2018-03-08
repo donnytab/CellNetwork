@@ -4,8 +4,8 @@
 /*
  * Definitions for different types of traffic time
  */
-#define DEQUEUE_TRAFFIC_TIME 0.2
-#define ENQUEUE_TRAFFIC_TIME 0.2
+#define DEQUEUE_TRAFFIC_TIME 0.1
+#define ENQUEUE_TRAFFIC_TIME 0.1
 
 #include <omnetpp.h>
 
