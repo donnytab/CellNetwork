@@ -7,7 +7,7 @@
 
 using namespace omnetpp;
 
-#define QUEUE_PROCESS_INTERVAL 0.5;
+#define QUEUE_PROCESS_INTERVAL 1.0;
 
 //namespace fifo {
 

@@ -151,9 +151,9 @@ void PicoSink::loadData() {
         while(getline(infile, row)) {
             stringstream s(row);
             string item;
-            while(getline(s, item, delimeter)) {
-                trainingMatrix[i][index] = atof(item.c_str());
-            }
+            getline(s, item, delimeter);    // Remove timestamp
+            getline(s, item, delimeter);
+            trainingMatrix[i][index] = atof(item.c_str());
             index++;
         }
         infile.close();
