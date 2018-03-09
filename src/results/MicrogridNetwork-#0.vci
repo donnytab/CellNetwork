@@ -1,15 +1,15 @@
-file 13061 1520527971                                           
+file 12884 1520614963                                           
 version 2
-run MicrogridNetwork-0-20180308-11:51:15-1116
+run MicrogridNetwork-0-20180309-12:01:21-1862
 attr configname MicrogridNetwork
-attr datetime 20180308-11:51:15
+attr datetime 20180309-12:01:21
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 1116
+attr processid 1862
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -44,12 +44,12 @@ vector 7 MicrogridNetwork.pico[3].queue queueingTime:vector ETV
 attr interpolationmode none
 attr title "queueing time at dequeue, vector"
 attr unit s
-0	1516 1855 0 1497 0 14.8 145 0 16 1284 13452
-1	3371 1855 0 1498 0 14.8 145 0 16 1284 13452
-2	5226 1855 0 1499 0 14.8 145 0 16 1284 13452
-3	7081 1855 0 1500 0 14.8 145 0 16 1284 13452
-4	8936 1031 61 1497 0.6 14.8 72 0.6 14.8 554.4 5512.8
-5	9967 1031 62 1498 0.6 14.8 72 0.6 14.8 554.4 5512.8
-6	10998 1031 63 1499 0.6 14.8 72 0.6 14.8 554.4 5512.8
-7	12029 1031 64 1500 0.6 14.8 72 0.6 14.8 554.4 5512.8
+0	1516 1796 0 1518 0 11.9 145 0 5 312 936
+1	3312 1797 0 1520 0 11.9 145 0 5 312 936
+2	5109 1797 0 1522 0 11.9 145 0 5 312 936
+3	6906 1798 0 1524 0 11.9 145 0 5 312 936
+4	8704 1044 61 1518 0.6 11.9 72 0.6 11.9 450 3667.8
+5	9748 1045 62 1520 0.6 11.9 72 0.6 11.9 450 3667.8
+6	10793 1045 63 1522 0.6 11.9 72 0.6 11.9 450 3667.8
+7	11838 1045 64 1524 0.6 11.9 72 0.6 11.9 450 3667.8
 

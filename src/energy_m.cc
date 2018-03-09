@@ -184,8 +184,6 @@ EnergyMsg::EnergyMsg(const char *name, short kind) : ::omnetpp::cMessage(name,ki
     this->source = 0;
     this->destination = 0;
     this->hopCount = 0;
-    for (unsigned int i=0; i<60; i++)
-        this->timestamp[i] = 0;
     this->enqueueTimestamp = 0;
     this->dequeueTimestamp = 0;
     for (unsigned int i=0; i<60; i++)
@@ -285,13 +283,13 @@ unsigned int EnergyMsg::getTimestampArraySize() const
     return 60;
 }
 
-::omnetpp::simtime_t EnergyMsg::getTimestamp(unsigned int k) const
+const char * EnergyMsg::getTimestamp(unsigned int k) const
 {
     if (k>=60) throw omnetpp::cRuntimeError("Array of size 60 indexed by %lu", (unsigned long)k);
-    return this->timestamp[k];
+    return this->timestamp[k].c_str();
 }
 
-void EnergyMsg::setTimestamp(unsigned int k, ::omnetpp::simtime_t timestamp)
+void EnergyMsg::setTimestamp(unsigned int k, const char * timestamp)
 {
     if (k>=60) throw omnetpp::cRuntimeError("Array of size 60 indexed by %lu", (unsigned long)k);
     this->timestamp[k] = timestamp;
@@ -481,7 +479,7 @@ const char *EnergyMsgDescriptor::getFieldTypeString(int field) const
         "int",
         "int",
         "int",
-        "simtime_t",
+        "string",
         "simtime_t",
         "simtime_t",
         "double",
@@ -559,7 +557,7 @@ std::string EnergyMsgDescriptor::getFieldValueAsString(void *object, int field, 
         case 0: return long2string(pp->getSource());
         case 1: return long2string(pp->getDestination());
         case 2: return long2string(pp->getHopCount());
-        case 3: return simtime2string(pp->getTimestamp(i));
+        case 3: return oppstring2string(pp->getTimestamp(i));
         case 4: return simtime2string(pp->getEnqueueTimestamp());
         case 5: return simtime2string(pp->getDequeueTimestamp());
         case 6: return double2string(pp->getEnergyCost(i));
@@ -581,7 +579,7 @@ bool EnergyMsgDescriptor::setFieldValueAsString(void *object, int field, int i, 
         case 0: pp->setSource(string2long(value)); return true;
         case 1: pp->setDestination(string2long(value)); return true;
         case 2: pp->setHopCount(string2long(value)); return true;
-        case 3: pp->setTimestamp(i,string2simtime(value)); return true;
+        case 3: pp->setTimestamp(i,(value)); return true;
         case 4: pp->setEnqueueTimestamp(string2simtime(value)); return true;
         case 5: pp->setDequeueTimestamp(string2simtime(value)); return true;
         case 6: pp->setEnergyCost(i,string2double(value)); return true;

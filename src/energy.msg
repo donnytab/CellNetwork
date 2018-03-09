@@ -4,7 +4,7 @@ message EnergyMsg
     int source; // User port, from 0
     int destination;
     int hopCount = 0;
-    simtime_t timestamp[60];
+    string timestamp[60];
     simtime_t enqueueTimestamp;
     simtime_t dequeueTimestamp;
     double energyCost[60];

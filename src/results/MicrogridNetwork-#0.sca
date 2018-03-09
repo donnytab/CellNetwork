@@ -1,86 +1,86 @@
 version 2
-run MicrogridNetwork-0-20180308-11:51:15-1116
+run MicrogridNetwork-0-20180309-12:01:21-1862
 attr configname MicrogridNetwork
-attr datetime 20180308-11:51:15
+attr datetime 20180309-12:01:21
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 1116
+attr processid 1862
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-scalar MicrogridNetwork.pico[0].queue queueingTime:mean 7.7
+scalar MicrogridNetwork.pico[0].queue queueingTime:mean 6.25
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar MicrogridNetwork.pico[0].queue queueingTime:max 14.8
+scalar MicrogridNetwork.pico[0].queue queueingTime:max 11.9
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar MicrogridNetwork.pico[0].queue busy:timeavg 0.99333333333333
+scalar MicrogridNetwork.pico[0].queue busy:timeavg 0.92561983471074
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
-scalar MicrogridNetwork.pico[0].queue queueLength:timeavg 8.88
+scalar MicrogridNetwork.pico[0].queue queueLength:timeavg 2.3801652892562
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar MicrogridNetwork.pico[0].queue queueLength:max 16
+scalar MicrogridNetwork.pico[0].queue queueLength:max 5
 attr interpolationmode sample-hold
 attr title "queue length, max"
-scalar MicrogridNetwork.pico[1].queue queueingTime:mean 7.7
+scalar MicrogridNetwork.pico[1].queue queueingTime:mean 6.25
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar MicrogridNetwork.pico[1].queue queueingTime:max 14.8
+scalar MicrogridNetwork.pico[1].queue queueingTime:max 11.9
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar MicrogridNetwork.pico[1].queue busy:timeavg 0.99333333333333
+scalar MicrogridNetwork.pico[1].queue busy:timeavg 0.92561983471074
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
-scalar MicrogridNetwork.pico[1].queue queueLength:timeavg 8.88
+scalar MicrogridNetwork.pico[1].queue queueLength:timeavg 2.3801652892562
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar MicrogridNetwork.pico[1].queue queueLength:max 16
+scalar MicrogridNetwork.pico[1].queue queueLength:max 5
 attr interpolationmode sample-hold
 attr title "queue length, max"
-scalar MicrogridNetwork.pico[2].queue queueingTime:mean 7.7
+scalar MicrogridNetwork.pico[2].queue queueingTime:mean 6.25
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar MicrogridNetwork.pico[2].queue queueingTime:max 14.8
+scalar MicrogridNetwork.pico[2].queue queueingTime:max 11.9
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar MicrogridNetwork.pico[2].queue busy:timeavg 0.99333333333333
+scalar MicrogridNetwork.pico[2].queue busy:timeavg 0.92561983471074
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
-scalar MicrogridNetwork.pico[2].queue queueLength:timeavg 8.88
+scalar MicrogridNetwork.pico[2].queue queueLength:timeavg 2.3801652892562
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar MicrogridNetwork.pico[2].queue queueLength:max 16
+scalar MicrogridNetwork.pico[2].queue queueLength:max 5
 attr interpolationmode sample-hold
 attr title "queue length, max"
-scalar MicrogridNetwork.pico[3].queue queueingTime:mean 7.7
+scalar MicrogridNetwork.pico[3].queue queueingTime:mean 6.25
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar MicrogridNetwork.pico[3].queue queueingTime:max 14.8
+scalar MicrogridNetwork.pico[3].queue queueingTime:max 11.9
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar MicrogridNetwork.pico[3].queue busy:timeavg 0.99333333333333
+scalar MicrogridNetwork.pico[3].queue busy:timeavg 0.92561983471074
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
-scalar MicrogridNetwork.pico[3].queue queueLength:timeavg 8.88
+scalar MicrogridNetwork.pico[3].queue queueLength:timeavg 2.3801652892562
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar MicrogridNetwork.pico[3].queue queueLength:max 16
+scalar MicrogridNetwork.pico[3].queue queueLength:max 5
 attr interpolationmode sample-hold
 attr title "queue length, max"
 
