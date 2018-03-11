@@ -54,9 +54,16 @@ void MacroCell::handleMessage(cMessage *msg)
 }
 
 void MacroCell::finish() {
-    emit(timeSensitiveQueueMsgTimeSignal, (double)timeSensitiveTimeAverage.dbl()/timeSensitiveCount);
-    emit(timeMediumQueueMsgTimeSignal, (double)timeMediumTimeAverage.dbl()/timeMediumCount);
-    emit(timeTolerantQueueMsgTimeSignal, (double)timeTolerantTimeAverage.dbl()/timeTolerantCount);
+    EV << "timeSensitiveQueueMsgTimeSignal: " << (double)timeSensitiveTimeAverage.dbl()/timeSensitiveCount << endl;
+    EV << "timeMediumQueueMsgTimeSignal: " << (double)timeMediumTimeAverage.dbl()/timeMediumCount << endl;
+    EV << "timeTolerantQueueMsgTimeSignal: " << (double)timeTolerantTimeAverage.dbl()/timeTolerantCount << endl;
+    EV << "timeSensitiveCount: " << timeSensitiveCount << endl;
+    EV << "timeMediumCount: " << timeMediumCount << endl;
+    EV << "timeTolerantCount: " << timeTolerantCount << endl;
+
+//    emit(timeSensitiveQueueMsgTimeSignal, (double)timeSensitiveTimeAverage.dbl()/timeSensitiveCount);
+//    emit(timeMediumQueueMsgTimeSignal, (double)timeMediumTimeAverage.dbl()/timeMediumCount);
+//    emit(timeTolerantQueueMsgTimeSignal, (double)timeTolerantTimeAverage.dbl()/timeTolerantCount);
 }
 
 void MacroCell::processMessageTime(int priority, simtime_t time) {
@@ -64,14 +71,17 @@ void MacroCell::processMessageTime(int priority, simtime_t time) {
         case 0:
             timeSensitiveTimeAverage += time;
             timeSensitiveCount++;
+            emit(timeSensitiveQueueMsgTimeSignal, (int)timeSensitiveTimeAverage.dbl()/timeSensitiveCount);
             break;
         case 1:
             timeMediumTimeAverage += time;
             timeMediumCount++;
+            emit(timeMediumQueueMsgTimeSignal, (int)timeMediumTimeAverage.dbl()/timeMediumCount);
             break;
         case 2:
             timeTolerantTimeAverage += time;
             timeTolerantCount++;
+            emit(timeTolerantQueueMsgTimeSignal, (int)timeTolerantTimeAverage.dbl()/timeTolerantCount);
             break;
     }
 }

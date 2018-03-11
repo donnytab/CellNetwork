@@ -20,7 +20,7 @@ using namespace std;
 #define MATRIX_COLUMN 1440      // Granularity for each training sample
 #define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
 #define PICOCELL_GATE_TOTAL 26    // 25 users + 1 macrocell
-#define PRIORITY_UPDATE_INTERVAL 3.0
+#define PRIORITY_UPDATE_INTERVAL 1.0
 
 class MsgCompare {
 public:
