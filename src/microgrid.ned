@@ -42,9 +42,11 @@ simple Fifo
         @signal[queueLength](type="int");
         @signal[busy](type="bool");
         @signal[queueingTime](type="simtime_t");
+        @signal[messageTime](type="simtime_t");
         @statistic[queueLength](title="queue length";record=vector,timeavg,max;interpolationmode=sample-hold);
         @statistic[busy](title="server busy state";record=vector?,timeavg;interpolationmode=sample-hold);
         @statistic[queueingTime](title="queueing time at dequeue";unit=s;record=vector,mean,max;interpolationmode=none);
+        @statistic[messageTime](title="energy message time";record=vector,mean,max,min;interpolationmode=sample-hold);
     gates:
         input in[];
         output out[];

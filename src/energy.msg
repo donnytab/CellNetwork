@@ -5,6 +5,8 @@ message EnergyMsg
     int destination;
     int hopCount = 0;
     string timestamp[60];
+    simtime_t startTimestamp;
+    simtime_t endTimestamp;
     simtime_t enqueueTimestamp;
     simtime_t dequeueTimestamp;
     double energyCost[60];

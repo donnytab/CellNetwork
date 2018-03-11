@@ -88,7 +88,7 @@ void User::generateMessage()
         msg->setName(ENERGY_MESSAGE_TYPE);
         msg->setSource(src);
         msg->setDestination(dest);
-//        msg->setTimestamp(i, simTime());
+        msg->setStartTimestamp(simTime());
         msg->setEnqueueTimestamp(0);
         msg->setDequeueTimestamp(0);
         scheduleAt(0.0+i*0.5, msg);

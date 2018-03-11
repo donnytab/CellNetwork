@@ -1,20 +1,29 @@
 version 2
-run MicrogridNetwork-0-20180309-13:18:49-2266
+run MicrogridNetwork-0-20180309-15:58:32-2641
 attr configname MicrogridNetwork
-attr datetime 20180309-13:18:49
+attr datetime 20180309-15:58:32
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 2266
+attr processid 2641
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
+scalar MicrogridNetwork.pico[0].queue messageTime:mean nan
+attr interpolationmode sample-hold
+attr title "energy message time, mean"
+scalar MicrogridNetwork.pico[0].queue messageTime:max nan
+attr interpolationmode sample-hold
+attr title "energy message time, max"
+scalar MicrogridNetwork.pico[0].queue messageTime:min nan
+attr interpolationmode sample-hold
+attr title "energy message time, min"
 scalar MicrogridNetwork.pico[0].queue queueingTime:mean 8.2
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
@@ -32,6 +41,15 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[0].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
+scalar MicrogridNetwork.pico[1].queue messageTime:mean nan
+attr interpolationmode sample-hold
+attr title "energy message time, mean"
+scalar MicrogridNetwork.pico[1].queue messageTime:max nan
+attr interpolationmode sample-hold
+attr title "energy message time, max"
+scalar MicrogridNetwork.pico[1].queue messageTime:min nan
+attr interpolationmode sample-hold
+attr title "energy message time, min"
 scalar MicrogridNetwork.pico[1].queue queueingTime:mean 8.2
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
@@ -49,6 +67,15 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[1].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
+scalar MicrogridNetwork.pico[2].queue messageTime:mean nan
+attr interpolationmode sample-hold
+attr title "energy message time, mean"
+scalar MicrogridNetwork.pico[2].queue messageTime:max nan
+attr interpolationmode sample-hold
+attr title "energy message time, max"
+scalar MicrogridNetwork.pico[2].queue messageTime:min nan
+attr interpolationmode sample-hold
+attr title "energy message time, min"
 scalar MicrogridNetwork.pico[2].queue queueingTime:mean 8.2
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
@@ -66,6 +93,15 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[2].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
+scalar MicrogridNetwork.pico[3].queue messageTime:mean nan
+attr interpolationmode sample-hold
+attr title "energy message time, mean"
+scalar MicrogridNetwork.pico[3].queue messageTime:max nan
+attr interpolationmode sample-hold
+attr title "energy message time, max"
+scalar MicrogridNetwork.pico[3].queue messageTime:min nan
+attr interpolationmode sample-hold
+attr title "energy message time, min"
 scalar MicrogridNetwork.pico[3].queue queueingTime:mean 8.2
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"

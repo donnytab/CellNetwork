@@ -28,6 +28,8 @@
  *     int destination;
  *     int hopCount = 0;
  *     string timestamp[60];
+ *     simtime_t startTimestamp;
+ *     simtime_t endTimestamp;
  *     simtime_t enqueueTimestamp;
  *     simtime_t dequeueTimestamp;
  *     double energyCost[60];
@@ -42,6 +44,8 @@ class EnergyMsg : public ::omnetpp::cMessage
     int destination;
     int hopCount;
     ::omnetpp::opp_string timestamp[60];
+    ::omnetpp::simtime_t startTimestamp;
+    ::omnetpp::simtime_t endTimestamp;
     ::omnetpp::simtime_t enqueueTimestamp;
     ::omnetpp::simtime_t dequeueTimestamp;
     double energyCost[60];
@@ -73,6 +77,10 @@ class EnergyMsg : public ::omnetpp::cMessage
     virtual unsigned int getTimestampArraySize() const;
     virtual const char * getTimestamp(unsigned int k) const;
     virtual void setTimestamp(unsigned int k, const char * timestamp);
+    virtual ::omnetpp::simtime_t getStartTimestamp() const;
+    virtual void setStartTimestamp(::omnetpp::simtime_t startTimestamp);
+    virtual ::omnetpp::simtime_t getEndTimestamp() const;
+    virtual void setEndTimestamp(::omnetpp::simtime_t endTimestamp);
     virtual ::omnetpp::simtime_t getEnqueueTimestamp() const;
     virtual void setEnqueueTimestamp(::omnetpp::simtime_t enqueueTimestamp);
     virtual ::omnetpp::simtime_t getDequeueTimestamp() const;
