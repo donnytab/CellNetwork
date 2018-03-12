@@ -5,8 +5,11 @@
 #include <cstdlib>
 #include <stdio.h>
 #include <limits>
+#include <string.h>
+#include <omnetpp.h>
 
 using namespace std;
+using namespace omnetpp;
 
 #define DELTA_MATRIX_ROW 24     // Number of message chunks
 #define DELTA_MATRIX_COLUMN 59      // Granularity for each chunk

@@ -1,14 +1,14 @@
 version 2
-run MicrogridNetwork-0-20180311-12:13:11-4426
+run MicrogridNetwork-0-20180312-16:38:43-6892
 attr configname MicrogridNetwork
-attr datetime 20180311-12:13:11
+attr datetime 20180312-16:38:43
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 4426
+attr processid 6892
 attr repetition 0
 attr replication #0
 attr resultdir results

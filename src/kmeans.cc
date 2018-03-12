@@ -109,6 +109,7 @@ double** Kmeans::updateCentroids(int* centroidIndexGroup, int k) {
 
     // Calculate the average values of the new centroid
     for(int i=0; i<k; i++) {
+        EV << "DATA GROUP count : " + to_string(groupDataCount[i]) <<endl;
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
             newCentroids[i][j] = (double)newCentroids[i][j]/groupDataCount[i];
         }
@@ -124,20 +125,23 @@ double* Kmeans::generateKmeansClusters(double** energyData, int k) {
 
     int* group = new int [DELTA_MATRIX_ROW];
     int* prevGroup = new int [DELTA_MATRIX_ROW];
+
+    // Group randomized initialization
     for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         group[i] = 0;
-        prevGroup[i] = 0;
+        prevGroup[i] = rand()%k;
     }
 
     loadData(energyData);
     group = joinGroup(generateCentroids(k), k);
 
     // Generate clusters until the group indexes remain stable
-    while(!isEqual(group, prevGroup, DELTA_MATRIX_ROW)) {
+    do {
+        EV << "Clustering!!" <<endl;
         centroid = updateCentroids(group ,k);
         prevGroup = group;
         group = joinGroup(centroid, k);
-    }
+    } while(!isEqual(group, prevGroup, DELTA_MATRIX_ROW));
 
     return getRootMeanSquare(centroid, k);
 }
@@ -158,6 +162,9 @@ double* Kmeans::getRootMeanSquare(double** centroids, int k) {
         for(int j=0; j<DELTA_MATRIX_COLUMN; j++) {
             sum += centroids[i][j] * centroids[i][j];
         }
+
+        EV << "SUM : " + to_string(sum) <<endl;
+
         rootMeanSquare[i] = sqrt(sum);
     }
     return rootMeanSquare;

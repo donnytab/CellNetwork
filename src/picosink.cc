@@ -72,6 +72,9 @@ void PicoSink::initialize()
     modelCentroids = new double [PRIORITY_LEVEL];
     loadData();
     trainModel();
+    for(int j=0; j<PRIORITY_LEVEL; j++) {
+        EV << "picocell "+ to_string(getIndex()) +" priority "+ to_string(j) + " : " + to_string(modelCentroids[j])<<endl;
+    }
 }
 
 void PicoSink::handleMessage(cMessage *msg)
