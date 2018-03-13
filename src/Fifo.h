@@ -6,6 +6,7 @@
 #include "traffic.h"
 
 using namespace omnetpp;
+using namespace std;
 
 #define QUEUE_PROCESS_INTERVAL 1.0;
 

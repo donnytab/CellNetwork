@@ -82,9 +82,9 @@ void User::generateMessage()
         for(int k=0; k<ENERGYMATRIX_COLUMN; k++) {
             msg->setTimestamp(k, timestampMatrix[i][k].c_str());
         }
-        if(priority != -1) {
-            msg->setPriority(priority);
-        }
+//        if(priority != -1) {
+//            msg->setPriority(priority);
+//        }
         msg->setName(ENERGY_MESSAGE_TYPE);
         msg->setSource(src);
         msg->setDestination(dest);

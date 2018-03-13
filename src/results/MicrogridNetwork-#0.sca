@@ -1,42 +1,42 @@
 version 2
-run MicrogridNetwork-0-20180312-16:38:43-6892
+run MicrogridNetwork-0-20180312-22:15:21-8742
 attr configname MicrogridNetwork
-attr datetime 20180312-16:38:43
+attr datetime 20180312-22:15:21
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 6892
+attr processid 8742
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg nan
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg 4.7872340425532
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, timeavg"
-scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max nan
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max 9
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, max"
-scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min nan
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min 1
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, min"
-scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg nan
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg 3.4615384615385
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, timeavg"
-scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:max nan
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:max 5
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, max"
-scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:min nan
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:min 1
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, min"
-scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 4.2797202797203
+scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 3.3356643356643
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, timeavg"
-scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 8
+scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 5
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, max"
 scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 1

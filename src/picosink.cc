@@ -92,7 +92,8 @@ void PicoSink::handleMessage(cMessage *msg)
         eMsg = check_and_cast<EnergyMsg*>(msg);
     }
 
-    if(hasUpdatedPriority<PRIORITY_LEVEL && eMsg) {
+//    if(hasUpdatedPriority<PRIORITY_LEVEL && eMsg) {
+    if(eMsg) {
         // Create priority message
         PriorityMsg *pMsg = new PriorityMsg();
         priority = evaluatePriority(eMsg);
@@ -117,6 +118,7 @@ void PicoSink::handleMessage(cMessage *msg)
 
     // Set priority of the current energy message before forwarding
     eMsg->setPreviousEventNumber(priority);
+    eMsg->setPriority(priority);
     forwardEnergyMessage(eMsg);
 
     conVar.notify_one();
@@ -166,6 +168,7 @@ void PicoSink::loadData() {
 void PicoSink::trainModel() {
     modelCentroids = kmeans.generateKmeansClusters(trainingMatrix, PRIORITY_LEVEL);
     sort(modelCentroids, modelCentroids+PRIORITY_LEVEL);
+    reverse(modelCentroids, modelCentroids+PRIORITY_LEVEL);
 }
 
 int PicoSink::evaluatePriority(EnergyMsg *msg) {

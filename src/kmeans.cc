@@ -129,7 +129,7 @@ double* Kmeans::generateKmeansClusters(double** energyData, int k) {
     // Group randomized initialization
     for(int i=0; i<DELTA_MATRIX_ROW; i++) {
         group[i] = 0;
-        prevGroup[i] = rand()%k;
+        prevGroup[i] = rand()%k;    // TODO: rand() to be improved
     }
 
     loadData(energyData);
@@ -163,7 +163,7 @@ double* Kmeans::getRootMeanSquare(double** centroids, int k) {
             sum += centroids[i][j] * centroids[i][j];
         }
 
-        EV << "SUM : " + to_string(sum) <<endl;
+//        EV << "SUM : " + to_string(sum) <<endl;
 
         rootMeanSquare[i] = sqrt(sum);
     }

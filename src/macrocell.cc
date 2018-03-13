@@ -67,6 +67,7 @@ void MacroCell::finish() {
 }
 
 void MacroCell::processMessageTime(int priority, simtime_t time) {
+    std::cout<<"MacroCell Priority:"<<priority<<std::endl;
     switch(priority) {
         case 0:
             timeSensitiveTimeAverage += time;

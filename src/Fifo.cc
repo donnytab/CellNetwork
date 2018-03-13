@@ -8,7 +8,7 @@ void Fifo::initialize() {
     serviceTime = QUEUE_PROCESS_INTERVAL;
     isScheduled = false;
 
-    energyQueue = cQueue("energyQueue", comparePriority);
+    energyQueue = cQueue("energyQueue", this->comparePriority);
     dequeueActionMsg = new cMessage("dequeueActionMsg");
     priorityMsgDequeueRequest = new cMessage("priorityMsgDequeueRequest");
     regularQueueCheckMsg = new cMessage("regularQueueCheckMsg");
@@ -98,7 +98,7 @@ int Fifo::comparePriority(cObject* a, cObject* b) {
     EnergyMsg *aMsg = check_and_cast<EnergyMsg*>(a);
     EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
 
-    return aMsg->getPriority() < bMsg->getPriority() ? 1 : -1;
+    return aMsg->getPriority() > bMsg->getPriority() ? 1 : -1;
 }
 
 //}; //namespace
