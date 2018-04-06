@@ -1,4 +1,4 @@
-file 17927 1520907443                                           
+file 17927 1523020559                                           
 version 2
 run MicrogridNetwork-0-20180312-22:15:21-8742
 attr configname MicrogridNetwork
@@ -19,49 +19,48 @@ attr seedset 0
 vector 0 MicrogridNetwork.pico[0].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
+0	1971 1932 0 1769 0 15.3 145 0 19 1620 20628
 vector 1 MicrogridNetwork.pico[1].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
+1	3903 1932 0 1770 0 15.3 145 0 19 1620 20628
 vector 2 MicrogridNetwork.pico[2].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
+2	5835 1932 0 1771 0 15.3 145 0 19 1620 20628
 vector 3 MicrogridNetwork.pico[3].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
+3	7767 1933 0 1772 0 15.3 145 0 19 1620 20628
 vector 4 MicrogridNetwork.pico[0].queue queueingTime:vector ETV
 attr interpolationmode none
 attr title "queueing time at dequeue, vector"
 attr unit s
+4	9700 1102 113 1769 1.1 15.3 72 1.1 15.3 590.4 6085.2
 vector 5 MicrogridNetwork.pico[1].queue queueingTime:vector ETV
 attr interpolationmode none
 attr title "queueing time at dequeue, vector"
 attr unit s
+5	10802 1102 114 1770 1.1 15.3 72 1.1 15.3 590.4 6085.2
 vector 6 MicrogridNetwork.pico[2].queue queueingTime:vector ETV
 attr interpolationmode none
 attr title "queueing time at dequeue, vector"
 attr unit s
+6	11904 1102 115 1771 1.1 15.3 72 1.1 15.3 590.4 6085.2
 vector 7 MicrogridNetwork.pico[3].queue queueingTime:vector ETV
 attr interpolationmode none
 attr title "queueing time at dequeue, vector"
 attr unit s
+7	13006 1103 116 1772 1.1 15.3 72 1.1 15.3 590.4 6085.2
 vector 8 MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, vector"
+8	14109 622 141 1626 1.2 11.8 50 1 5 129 437
 vector 9 MicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, vector"
+9	14731 495 144 1633 1.2 12 41 1 5 113 393
 vector 10 MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, vector"
-0	1971 1932 0 1769 0 15.3 145 0 19 1620 20628
-1	3903 1932 0 1770 0 15.3 145 0 19 1620 20628
-2	5835 1932 0 1771 0 15.3 145 0 19 1620 20628
-3	7767 1933 0 1772 0 15.3 145 0 19 1620 20628
-4	9700 1102 113 1769 1.1 15.3 72 1.1 15.3 590.4 6085.2
-5	10802 1102 114 1770 1.1 15.3 72 1.1 15.3 590.4 6085.2
-6	11904 1102 115 1771 1.1 15.3 72 1.1 15.3 590.4 6085.2
-7	13006 1103 116 1772 1.1 15.3 72 1.1 15.3 590.4 6085.2
-8	14109 622 141 1626 1.2 11.8 50 1 5 129 437
-9	14731 495 144 1633 1.2 12 41 1 5 113 393
-10	15226 2700 162 1776 1.4 15.4 197 1 9 1062 6702
-
+10	15226 2701 162 1776 1.4 15.4 197 1 9 1062 6702

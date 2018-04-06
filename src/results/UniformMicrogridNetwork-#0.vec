@@ -1,0 +1,46 @@
+version 2
+run UniformMicrogridNetwork-0-20180406-09:28:07-44537
+attr configname UniformMicrogridNetwork
+attr datetime 20180406-09:28:07
+attr experiment UniformMicrogridNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network UniformMicrogridNetwork
+attr processid 44537
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0 UniformMicrogridNetwork.pico[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 UniformMicrogridNetwork.pico[1].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 2 UniformMicrogridNetwork.pico[2].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 3 UniformMicrogridNetwork.pico[3].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+0	0	0	0
+0	25	0.1	1
+0	26	0.1	2
+0	27	0.1	3
+1	0	0	0
+1	28	0.1	1
+1	29	0.1	2
+1	30	0.1	3
+2	0	0	0
+2	31	0.1	1
+2	32	0.1	2
+2	33	0.1	3
+3	0	0	0
+3	34	0.1	1
+3	35	0.1	2
+3	36	0.1	3
+

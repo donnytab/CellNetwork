@@ -1,0 +1,71 @@
+file 18333 1523022579                                           
+version 2
+run HeterogeneousMicrogridNetwork-0-20180406-09:47:39-45372
+attr configname HeterogeneousMicrogridNetwork
+attr datetime 20180406-09:47:39
+attr experiment HeterogeneousMicrogridNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network HeterogeneousMicrogridNetwork
+attr processid 45372
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 0 HeterogeneousMicrogridNetwork.pico[0].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 HeterogeneousMicrogridNetwork.pico[1].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 2 HeterogeneousMicrogridNetwork.pico[2].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 3 HeterogeneousMicrogridNetwork.pico[3].queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+0	1022 74 0 30 0 0.1 7 0 6 21 91
+1	1096 41 0 33 0 0.1 4 0 3 6 14
+2	1137 30 0 35 0 0.1 3 0 2 3 5
+3	1167 19 0 36 0 0.1 2 0 1 1 1
+vector 4 HeterogeneousMicrogridNetwork.pico[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 5 HeterogeneousMicrogridNetwork.pico[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 6 HeterogeneousMicrogridNetwork.pico[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 7 HeterogeneousMicrogridNetwork.pico[3].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 8 HeterogeneousMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, vector"
+vector 9 HeterogeneousMicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, vector"
+vector 10 HeterogeneousMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, vector"
+0	2332 3930 73 1785 0.6 29.7 282 0 91 13587 818981
+1	6262 1890 79 1639 0.6 15.3 141 0 19 1614 20614
+2	8152 1180 82 1579 0.6 12.5 94 0 5 237 771
+3	9332 589 84 1537 0.6 11.7 47 0 2 47 71
+4	9921 2325 113 1785 1.1 29.7 144 1.1 29.7 2217.6 44103.84
+5	12246 1101 114 1639 1.1 15.3 72 1.1 15.3 590.4 6085.2
+6	13347 708 115 1579 1.1 12.5 48 1.1 12.5 314.4 2628.8
+7	14055 353 116 1537 1.1 11.7 24 1.1 11.7 153.6 1264.24
+8	14408 589 141 1554 1.2 11.8 48 1 5 119 387
+9	14997 563 143 1583 1.2 12.6 46 1 6 152 620
+10	15560 2772 196 1786 1.6 29.8 194 1 14 1395 12369
+
