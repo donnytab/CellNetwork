@@ -254,7 +254,7 @@ network NaiveUniformMicrogridNetwork
 {
     types:
         channel Channel extends ned.DelayChannel {
-            delay = 100ms;
+            delay = 500ms;
         }
     submodules:
         macro[1]: MacroCell;

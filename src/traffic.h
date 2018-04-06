@@ -6,6 +6,7 @@
  */
 #define DEQUEUE_TRAFFIC_TIME 0.2
 #define ENQUEUE_TRAFFIC_TIME 0.2
+#define NAIVE_MSG_FORWARD_TIME 0.5
 
 #include <omnetpp.h>
 

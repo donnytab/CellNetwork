@@ -2,6 +2,7 @@
 #include <string.h>
 #include <omnetpp.h>
 #include "energy_m.h"
+#include "traffic.h"
 
 using namespace omnetpp;
 using namespace std;
@@ -23,13 +24,12 @@ void NaivePicoCell::initialize()
 void NaivePicoCell::handleMessage(cMessage *msg)
 {
     EnergyMsg *eMsg = check_and_cast<EnergyMsg*>(msg);
-
     if(eMsg) {
-        forwardMessage(eMsg);
+       forwardMessage(eMsg);
     }
 }
 
 void NaivePicoCell::forwardMessage(EnergyMsg *msg)
 {
-    send(msg, "out", 0);
+    sendDelayed(msg, NAIVE_MSG_FORWARD_TIME, "out", 0);
 }
