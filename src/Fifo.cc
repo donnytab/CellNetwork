@@ -7,20 +7,37 @@ Define_Module(Fifo);
 void Fifo::initialize() {
     serviceTime = QUEUE_PROCESS_INTERVAL;
     isScheduled = false;
+    totalPacket = 0;
+
+    throughputStat.setName("Average throughput");
 
     energyQueue = cQueue("energyQueue", this->comparePriority);
     dequeueActionMsg = new cMessage("dequeueActionMsg");
     priorityMsgDequeueRequest = new cMessage("priorityMsgDequeueRequest");
     regularQueueCheckMsg = new cMessage("regularQueueCheckMsg");
+    statRecordMsg = new cMessage("statRecordMsg");
 
     qlenSignal = registerSignal("queueLength");
     busySignal = registerSignal("busy");
     queueingTimeSignal = registerSignal("queueingTime");
+    avgThroughputSignal = registerSignal("averageThroughput");
+
     emit(qlenSignal, energyQueue.getLength());
     emit(busySignal, 0);
+    emit(avgThroughputSignal, 0);
+    scheduleAt(simTime(), statRecordMsg);
 }
 
 void Fifo::handleMessage(cMessage *msg) {
+    if(msg == statRecordMsg) {
+        double currentThroughput = getAverageThroughput(totalPacket, simTime());
+        throughputStat.collect(currentThroughput);
+        if(energyQueue.getLength() != 0) {
+            scheduleAt(simTime()+1.0, statRecordMsg);
+        }
+        return;
+    }
+
     // Case for dequeue action message
     if(msg == dequeueActionMsg) {
         dequeueMessage();
@@ -50,6 +67,7 @@ void Fifo::handleMessage(cMessage *msg) {
     if(eMsg) {
         eMsg->setEnqueueTimestamp(simTime());
         energyQueue.insert(eMsg);
+        totalPacket++;
         emit(qlenSignal, energyQueue.getLength());
     }
 
@@ -99,6 +117,14 @@ int Fifo::comparePriority(cObject* a, cObject* b) {
     EnergyMsg *bMsg = check_and_cast<EnergyMsg*>(b);
 
     return aMsg->getPriority() > bMsg->getPriority() ? 1 : -1;
+}
+
+void Fifo::finish() {
+    throughputStat.record();
+}
+
+double Fifo::getAverageThroughput(int packetNum, simtime_t time) {
+    return time > 0 ? (double)packetNum*8/time : 0.0;    // bps
 }
 
 //}; //namespace

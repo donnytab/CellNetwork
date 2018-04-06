@@ -9,6 +9,7 @@ using namespace omnetpp;
 using namespace std;
 
 #define QUEUE_PROCESS_INTERVAL 1.0;
+#define STAT_RECORD_INTERVAL 1.0;
 
 //namespace fifo {
 
@@ -24,12 +25,16 @@ class Fifo : public cSimpleModule
     cMessage *dequeueActionMsg;
     cMessage *priorityMsgDequeueRequest;    // self-message for processing high priority messsage
     cMessage *regularQueueCheckMsg;
+    cMessage* statRecordMsg;
     cQueue energyQueue;
 
     simtime_t serviceTime;
     simsignal_t qlenSignal;
     simsignal_t busySignal;
     simsignal_t queueingTimeSignal;
+    simsignal_t avgThroughputSignal;
+
+    cStdDev throughputStat;
 
     bool isScheduled;
 
@@ -39,6 +44,11 @@ class Fifo : public cSimpleModule
     virtual void checkQueue(simtime_t time);
     virtual simtime_t startService(cMessage *msg);
     virtual void dequeueMessage();
+    virtual void finish();
+    double getAverageThroughput(int packetNum, simtime_t time);
+
+  private:
+    int totalPacket;
 };
 
 //}; //namespace

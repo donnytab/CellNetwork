@@ -1,15 +1,15 @@
-file 951 1523026045                                             
+file 18782 1523043327                                           
 version 2
-run MicrogridNetwork-0-20180406-10:47:22-45567
+run MicrogridNetwork-0-20180406-15:33:43-49568
 attr configname MicrogridNetwork
-attr datetime 20180406-10:47:22
+attr datetime 20180406-15:33:43
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 45567
+attr processid 49568
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -19,17 +19,65 @@ attr seedset 0
 vector 0 MicrogridNetwork.pico[0].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
-vector 1 MicrogridNetwork.pico[1].queue queueLength:vector ETV
+vector 1 MicrogridNetwork.pico[0].queue averageThroughput:vector ETV
+attr interpolationmode sample-hold
+attr title "average throughput, vector"
+vector 2 MicrogridNetwork.pico[1].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
-vector 2 MicrogridNetwork.pico[2].queue queueLength:vector ETV
+vector 3 MicrogridNetwork.pico[1].queue averageThroughput:vector ETV
+attr interpolationmode sample-hold
+attr title "average throughput, vector"
+vector 4 MicrogridNetwork.pico[2].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
-vector 3 MicrogridNetwork.pico[3].queue queueLength:vector ETV
+vector 5 MicrogridNetwork.pico[2].queue averageThroughput:vector ETV
+attr interpolationmode sample-hold
+attr title "average throughput, vector"
+vector 6 MicrogridNetwork.pico[3].queue queueLength:vector ETV
 attr interpolationmode sample-hold
 attr title "queue length, vector"
-0	918 8 0 0 0 0 1 0 0 0 0
-1	926 8 0 0 0 0 1 0 0 0 0
-2	934 8 0 0 0 0 1 0 0 0 0
-3	942 8 0 0 0 0 1 0 0 0 0
+vector 7 MicrogridNetwork.pico[3].queue averageThroughput:vector ETV
+attr interpolationmode sample-hold
+attr title "average throughput, vector"
+vector 8 MicrogridNetwork.pico[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 9 MicrogridNetwork.pico[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 10 MicrogridNetwork.pico[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 11 MicrogridNetwork.pico[3].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 12 MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, vector"
+vector 13 MicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, vector"
+vector 14 MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, vector"
+0	2553 1933 0 1773 0 15.3 145 0 19 1620 20628
+1	4486 8 0 0 0 0 1 0 0 0 0
+2	4494 1933 0 1774 0 15.3 145 0 19 1620 20628
+3	6427 8 0 0 0 0 1 0 0 0 0
+4	6435 1933 0 1775 0 15.3 145 0 19 1620 20628
+5	8368 8 0 0 0 0 1 0 0 0 0
+6	8376 1933 0 1776 0 15.3 145 0 19 1620 20628
+7	10309 8 0 0 0 0 1 0 0 0 0
+8	10317 1103 117 1773 1.1 15.3 72 1.1 15.3 590.4 6085.2
+9	11420 1103 118 1774 1.1 15.3 72 1.1 15.3 590.4 6085.2
+10	12523 1175 119 1775 1.1 15.3 72 1.1 15.3 590.4 6085.2
+11	13698 1175 120 1776 1.1 15.3 72 1.1 15.3 590.4 6085.2
+12	14873 672 145 1630 1.2 11.8 50 1 5 129 437
+13	15545 536 148 1637 1.2 12 41 1 5 113 393
+14	16081 2700 166 1780 1.4 15.4 197 1 9 1062 6702
 
