@@ -1,5 +1,5 @@
 [General]
-last-configname=HeterogeneousMicrogridNetwork
+last-configname=NaiveUniformMicrogridNetwork
 last-runnumber=0
 
 [RunModeProfiles]

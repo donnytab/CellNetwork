@@ -35,6 +35,7 @@ OBJS = \
     $O/src/Fifo.o \
     $O/src/kmeans.o \
     $O/src/macrocell.o \
+    $O/src/naive_picocell.o \
     $O/src/picosink.o \
     $O/src/user.o \
     $O/src/energy_m.o \
