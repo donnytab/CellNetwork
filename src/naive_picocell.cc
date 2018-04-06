@@ -31,5 +31,5 @@ void NaivePicoCell::handleMessage(cMessage *msg)
 
 void NaivePicoCell::forwardMessage(EnergyMsg *msg)
 {
-    send(msg, "out");
+    send(msg, "out", 0);
 }

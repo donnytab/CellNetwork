@@ -92,7 +92,7 @@ simple NaivePicoCell
         @display("i=device/antennatower");
     gates:
         input in[];
-        output out;
+        output out[];
 }
 
 network MicrogridNetwork
@@ -273,11 +273,22 @@ network NaiveUniformMicrogridNetwork
         user[9].out --> Channel --> pico[3].in++;
         user[10].out --> Channel --> pico[3].in++;
         user[11].out --> Channel --> pico[3].in++;
-        
-//        for k=0..2 {
-        macro[0].in++ <-- Channel <-- pico[0].out;
-        macro[0].in++ <-- Channel <-- pico[1].out;
-        macro[0].in++ <-- Channel <-- pico[2].out;
-        macro[0].in++ <-- Channel <-- pico[3].out;
-//        }
+
+        macro[0].in++ <-- Channel <-- pico[0].out++;
+        macro[0].in++ <-- Channel <-- pico[1].out++;
+        macro[0].in++ <-- Channel <-- pico[2].out++;
+        macro[0].in++ <-- Channel <-- pico[3].out++;
+
+        user[0].in <-- Channel <-- pico[0].out++;
+        user[1].in <-- Channel <-- pico[0].out++;
+        user[2].in <-- Channel <-- pico[0].out++;
+        user[3].in <-- Channel <-- pico[1].out++;
+        user[4].in <-- Channel <-- pico[1].out++;
+        user[5].in <-- Channel <-- pico[1].out++;
+        user[6].in <-- Channel <-- pico[2].out++;
+        user[7].in <-- Channel <-- pico[2].out++;
+        user[8].in <-- Channel <-- pico[2].out++;
+        user[9].in <-- Channel <-- pico[3].out++;
+        user[10].in <-- Channel <-- pico[3].out++;
+        user[11].in <-- Channel <-- pico[3].out++;
 }

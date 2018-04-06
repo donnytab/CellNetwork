@@ -1,0 +1,45 @@
+version 2
+run NaiveUniformMicrogridNetwork-0-20180406-11:24:49-47728
+attr configname NaiveUniformMicrogridNetwork
+attr datetime 20180406-11:24:49
+attr experiment NaiveUniformMicrogridNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network NaiveUniformMicrogridNetwork
+attr processid 47728
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg nan
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, timeavg"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max nan
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, max"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min nan
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, min"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg nan
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, timeavg"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:max nan
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, max"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:min nan
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, min"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 0
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, timeavg"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 1
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, max"
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 0
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, min"
+
