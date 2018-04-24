@@ -47,7 +47,6 @@ class Fifo : public cSimpleModule
     virtual void finish();
     double getAverageThroughput(int packetNum, simtime_t time);
 
-  private:
     int totalPacket;
 };
 

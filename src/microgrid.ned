@@ -92,6 +92,11 @@ simple NaivePicoCell
 {
     parameters:
         @display("i=device/antennatower");
+        @signal[averageThroughput](type="int");
+//        @signal[messageTime](type="simtime_t");
+
+        @statistic[averageThroughput](title="average throughput";record=vector,timeavg,max;interpolationmode=sample-hold);
+//        @statistic[messageTime](title="energy message time";record=vector,mean,max,min;interpolationmode=sample-hold);
     gates:
         input in[];
         output out[];

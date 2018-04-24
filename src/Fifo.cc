@@ -9,13 +9,13 @@ void Fifo::initialize() {
     isScheduled = false;
     totalPacket = 0;
 
-    throughputStat.setName("Average throughput");
+//    throughputStat.setName("Average throughput");
 
     energyQueue = cQueue("energyQueue", this->comparePriority);
     dequeueActionMsg = new cMessage("dequeueActionMsg");
     priorityMsgDequeueRequest = new cMessage("priorityMsgDequeueRequest");
     regularQueueCheckMsg = new cMessage("regularQueueCheckMsg");
-    statRecordMsg = new cMessage("statRecordMsg");
+//    statRecordMsg = new cMessage("statRecordMsg");
 
     qlenSignal = registerSignal("queueLength");
     busySignal = registerSignal("busy");
@@ -25,18 +25,19 @@ void Fifo::initialize() {
     emit(qlenSignal, energyQueue.getLength());
     emit(busySignal, 0);
     emit(avgThroughputSignal, 0);
-    scheduleAt(simTime(), statRecordMsg);
+//    scheduleAt(simTime(), statRecordMsg);
 }
 
 void Fifo::handleMessage(cMessage *msg) {
-    if(msg == statRecordMsg) {
-        double currentThroughput = getAverageThroughput(totalPacket, simTime());
-        throughputStat.collect(currentThroughput);
-        if(energyQueue.getLength() != 0) {
-            scheduleAt(simTime()+1.0, statRecordMsg);
-        }
-        return;
-    }
+//    if(msg == statRecordMsg) {
+//        double currentThroughput = getAverageThroughput(totalPacket, simTime());
+////        throughputStat.collect(currentThroughput);
+//        emit(avgThroughputSignal, totalPacket);
+//        if(energyQueue.getLength() != 0) {
+//            scheduleAt(simTime()+1.0, statRecordMsg);
+//        }
+//        return;
+//    }
 
     // Case for dequeue action message
     if(msg == dequeueActionMsg) {
@@ -53,12 +54,17 @@ void Fifo::handleMessage(cMessage *msg) {
     if(msg == regularQueueCheckMsg) {
         if(!energyQueue.isEmpty()) {
             dequeueMessage();
+//            EV << "Fifo Average totalPacket: " << totalPacket << endl;
             scheduleAt(simTime()+DEQUEUE_TRAFFIC_TIME, regularQueueCheckMsg);
         } else {
             // Queue empty
             isScheduled = false;
             emit(busySignal, 0);
         }
+
+        emit(avgThroughputSignal, totalPacket);
+        EV << "Fifo Average totalPacket: " << totalPacket << endl;
+
         return;
     }
 
@@ -120,7 +126,8 @@ int Fifo::comparePriority(cObject* a, cObject* b) {
 }
 
 void Fifo::finish() {
-    throughputStat.record();
+    //throughputStat.record();
+//    EV << "Fifo Average Throughput: " << throughputStat.detailedInfo() << endl;
 }
 
 double Fifo::getAverageThroughput(int packetNum, simtime_t time) {

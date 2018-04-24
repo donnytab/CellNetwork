@@ -1,14 +1,14 @@
 version 2
-run MicrogridNetwork-0-20180406-15:33:43-49568
+run MicrogridNetwork-0-20180424-03:41:05-10841
 attr configname MicrogridNetwork
-attr datetime 20180406-15:33:43
+attr datetime 20180424-03:41:05
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 49568
+attr processid 10841
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -42,18 +42,10 @@ attr title "timeSensitiveQueueMsgTime, max"
 scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 1
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, min"
-statistic MicrogridNetwork.pico[0].queue "Average throughput"
-field count 1
-field mean 0
-field stddev nan
-field min 0
-field max 0
-field sum 0
-field sqrsum 0
-scalar MicrogridNetwork.pico[0].queue averageThroughput:timeavg 0
+scalar MicrogridNetwork.pico[0].queue averageThroughput:timeavg 43.896774193548
 attr interpolationmode sample-hold
 attr title "average throughput, timeavg"
-scalar MicrogridNetwork.pico[0].queue averageThroughput:max 0
+scalar MicrogridNetwork.pico[0].queue averageThroughput:max 72
 attr interpolationmode sample-hold
 attr title "average throughput, max"
 scalar MicrogridNetwork.pico[0].queue queueingTime:mean 8.2
@@ -73,18 +65,10 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[0].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
-statistic MicrogridNetwork.pico[1].queue "Average throughput"
-field count 1
-field mean 0
-field stddev nan
-field min 0
-field max 0
-field sum 0
-field sqrsum 0
-scalar MicrogridNetwork.pico[1].queue averageThroughput:timeavg 0
+scalar MicrogridNetwork.pico[1].queue averageThroughput:timeavg 43.896774193548
 attr interpolationmode sample-hold
 attr title "average throughput, timeavg"
-scalar MicrogridNetwork.pico[1].queue averageThroughput:max 0
+scalar MicrogridNetwork.pico[1].queue averageThroughput:max 72
 attr interpolationmode sample-hold
 attr title "average throughput, max"
 scalar MicrogridNetwork.pico[1].queue queueingTime:mean 8.2
@@ -104,18 +88,10 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[1].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
-statistic MicrogridNetwork.pico[2].queue "Average throughput"
-field count 1
-field mean 0
-field stddev nan
-field min 0
-field max 0
-field sum 0
-field sqrsum 0
-scalar MicrogridNetwork.pico[2].queue averageThroughput:timeavg 0
+scalar MicrogridNetwork.pico[2].queue averageThroughput:timeavg 43.896774193548
 attr interpolationmode sample-hold
 attr title "average throughput, timeavg"
-scalar MicrogridNetwork.pico[2].queue averageThroughput:max 0
+scalar MicrogridNetwork.pico[2].queue averageThroughput:max 72
 attr interpolationmode sample-hold
 attr title "average throughput, max"
 scalar MicrogridNetwork.pico[2].queue queueingTime:mean 8.2
@@ -135,18 +111,10 @@ attr title "queue length, timeavg"
 scalar MicrogridNetwork.pico[2].queue queueLength:max 19
 attr interpolationmode sample-hold
 attr title "queue length, max"
-statistic MicrogridNetwork.pico[3].queue "Average throughput"
-field count 1
-field mean 0
-field stddev nan
-field min 0
-field max 0
-field sum 0
-field sqrsum 0
-scalar MicrogridNetwork.pico[3].queue averageThroughput:timeavg 0
+scalar MicrogridNetwork.pico[3].queue averageThroughput:timeavg 43.896774193548
 attr interpolationmode sample-hold
 attr title "average throughput, timeavg"
-scalar MicrogridNetwork.pico[3].queue averageThroughput:max 0
+scalar MicrogridNetwork.pico[3].queue averageThroughput:max 72
 attr interpolationmode sample-hold
 attr title "average throughput, max"
 scalar MicrogridNetwork.pico[3].queue queueingTime:mean 8.2
