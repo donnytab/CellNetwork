@@ -1,15 +1,15 @@
-file 22837 1524555786                                           
+file 1559 1525222867                                            
 version 2
-run MicrogridNetwork-0-20180424-03:41:05-10841
+run MicrogridNetwork-0-20180501-21:01:04-14341
 attr configname MicrogridNetwork
-attr datetime 20180424-03:41:05
+attr datetime 20180501-21:01:04
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 10841
+attr processid 14341
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -40,44 +40,12 @@ attr title "queue length, vector"
 vector 7 MicrogridNetwork.pico[3].queue averageThroughput:vector ETV
 attr interpolationmode sample-hold
 attr title "average throughput, vector"
-vector 8 MicrogridNetwork.pico[0].queue queueingTime:vector ETV
-attr interpolationmode none
-attr title "queueing time at dequeue, vector"
-attr unit s
-vector 9 MicrogridNetwork.pico[1].queue queueingTime:vector ETV
-attr interpolationmode none
-attr title "queueing time at dequeue, vector"
-attr unit s
-vector 10 MicrogridNetwork.pico[2].queue queueingTime:vector ETV
-attr interpolationmode none
-attr title "queueing time at dequeue, vector"
-attr unit s
-vector 11 MicrogridNetwork.pico[3].queue queueingTime:vector ETV
-attr interpolationmode none
-attr title "queueing time at dequeue, vector"
-attr unit s
-vector 12 MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
-attr interpolationmode sample-hold
-attr title "timeSensitiveQueueMsgTime, vector"
-vector 13 MicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
-attr interpolationmode sample-hold
-attr title "timeMediumQueueMsgTime, vector"
-vector 14 MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
-attr interpolationmode sample-hold
-attr title "timeTolerantQueueMsgTime, vector"
-0	2553 1932 0 1769 0 15.3 145 0 19 1620 20628
-1	4485 1023 0 1777 0 15.5 74 0 72 3474 199638
-2	5508 1932 0 1770 0 15.3 145 0 19 1620 20628
-3	7440 1023 0 1778 0 15.5 74 0 72 3474 199638
-4	8463 1932 0 1771 0 15.3 145 0 19 1620 20628
-5	10395 1023 0 1779 0 15.5 74 0 72 3474 199638
-6	11418 1933 0 1772 0 15.3 145 0 19 1620 20628
-7	13351 1024 0 1780 0 15.5 74 0 72 3474 199638
-8	14375 1102 113 1769 1.1 15.3 72 1.1 15.3 590.4 6085.2
-9	15477 1102 114 1770 1.1 15.3 72 1.1 15.3 590.4 6085.2
-10	16579 1174 115 1771 1.1 15.3 72 1.1 15.3 590.4 6085.2
-11	17753 1175 116 1772 1.1 15.3 72 1.1 15.3 590.4 6085.2
-12	18928 672 141 1626 1.2 11.8 50 1 5 129 437
-13	19600 536 144 1633 1.2 12 41 1 5 113 393
-14	20136 2700 162 1776 1.4 15.4 197 1 9 1062 6702
+0	1494 8 0 0 0 0 1 0 0 0 0
+1	1502 8 0 0 0 0 1 0 0 0 0
+2	1510 8 0 0 0 0 1 0 0 0 0
+3	1518 8 0 0 0 0 1 0 0 0 0
+4	1526 8 0 0 0 0 1 0 0 0 0
+5	1534 8 0 0 0 0 1 0 0 0 0
+6	1542 8 0 0 0 0 1 0 0 0 0
+7	1550 8 0 0 0 0 1 0 0 0 0
 

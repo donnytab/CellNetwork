@@ -1,41 +1,4 @@
 #include "user.h"
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//#include <omnetpp.h>
-//#include <dirent.h>
-//#include <fstream>
-//#include <iostream>
-//#include "energy_m.h"
-//#include "priority_m.h"
-//
-//using namespace omnetpp;
-//using namespace std;
-//
-//#define MINUTE_MILLISECOND 60000
-//#define ENERGYMATRIX_ROW 24     // Number of message chunks
-//#define ENERGYMATRIX_COLUMN 60      // Granularity for each chunk
-//
-//class User : public cSimpleModule
-//{
-//private:
-//    static double** energyMatrix;
-//    static string** timestampMatrix;
-//    int priority;
-//    const char* ENERGY_MESSAGE_TYPE;
-//protected:
-////    virtual EnergyMsg* generateMessage();
-//    virtual void generateMessage();
-//    virtual void forwardMessage(EnergyMsg *msg);
-//    virtual void initialize() override;
-//    virtual void handleMessage(cMessage *msg) override;
-//    virtual void loadDataset();
-//};
-//
-//Define_Module(User);
-//
-//double** User::energyMatrix;
-//string** User::timestampMatrix;
 
 void User::initialize()
 {
@@ -59,8 +22,6 @@ void User::initialize()
 
 void User::handleMessage(cMessage *msg)
 {
-//    PriorityMsg *pMsg = check_and_cast<PriorityMsg *>(msg);
-//    priority = pMsg->getPriority();
     if(!strcmp(msg->getName(), "energyMessage")) {
         forwardMessage(check_and_cast<EnergyMsg *>(msg));
     }
@@ -83,9 +44,7 @@ void User::generateMessage()
         for(int k=0; k<ENERGYMATRIX_COLUMN; k++) {
             msg->setTimestamp(k, timestampMatrix[i][k].c_str());
         }
-//        if(priority != -1) {
-//            msg->setPriority(priority);
-//        }
+
         msg->setName(ENERGY_MESSAGE_TYPE);
         msg->setSource(src);
         msg->setDestination(dest);
@@ -100,10 +59,6 @@ void User::forwardMessage(EnergyMsg *msg)
 {
     // Increment hop count.
     msg->setHopCount(msg->getHopCount()+1);
-
-    // Same routing as before: random gate.
-//    int n = gateSize("out");
-//    int k = intuniform(0, n-1);
 
     EV << "Forwarding user message " << msg << " on gate[" << 0 << "]\n";
     send(msg, "out");
