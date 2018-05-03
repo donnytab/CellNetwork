@@ -1,15 +1,15 @@
-file 1559 1525222867                                            
+file 92562 1525384544                                           
 version 2
-run MicrogridNetwork-0-20180501-21:01:04-14341
+run MicrogridNetwork-0-20180503-17:44:27-16124
 attr configname MicrogridNetwork
-attr datetime 20180501-21:01:04
+attr datetime 20180503-17:44:27
 attr experiment MicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network MicrogridNetwork
-attr processid 14341
+attr processid 16124
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -40,12 +40,44 @@ attr title "queue length, vector"
 vector 7 MicrogridNetwork.pico[3].queue averageThroughput:vector ETV
 attr interpolationmode sample-hold
 attr title "average throughput, vector"
-0	1494 8 0 0 0 0 1 0 0 0 0
-1	1502 8 0 0 0 0 1 0 0 0 0
-2	1510 8 0 0 0 0 1 0 0 0 0
-3	1518 8 0 0 0 0 1 0 0 0 0
-4	1526 8 0 0 0 0 1 0 0 0 0
-5	1534 8 0 0 0 0 1 0 0 0 0
-6	1542 8 0 0 0 0 1 0 0 0 0
-7	1550 8 0 0 0 0 1 0 0 0 0
+vector 8 MicrogridNetwork.pico[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 9 MicrogridNetwork.pico[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 10 MicrogridNetwork.pico[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 11 MicrogridNetwork.pico[3].queue queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 12 MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, vector"
+vector 13 MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, vector"
+vector 14 MicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, vector"
+0	2553 8615 0 6953 0 58.5 577 0 235 68688 10721376
+1	11168 4565 0 6961 0 58.7 290 0 288 76104 21110112
+2	15733 8618 0 6954 0 58.5 577 0 235 68688 10721376
+3	24351 4565 0 6962 0 58.7 290 0 288 76104 21110112
+4	28916 8618 0 6955 0 58.5 577 0 235 68688 10721376
+5	37534 4565 0 6963 0 58.7 290 0 288 76104 21110112
+6	42099 8618 0 6956 0 58.5 577 0 235 68688 10721376
+7	50717 4565 0 6964 0 58.7 290 0 288 76104 21110112
+8	55282 4800 437 6953 1.1 58.5 288 1.1 58.5 8582.4 335380.8
+9	60082 4800 438 6954 1.1 58.5 288 1.1 58.5 8582.4 335380.8
+10	64882 5088 439 6955 1.1 58.5 288 1.1 58.5 8582.4 335380.8
+11	69970 5088 440 6956 1.1 58.5 288 1.1 58.5 8582.4 335380.8
+12	75058 2945 537 5247 1.2 15.8 213 1 7 799 3701
+13	78003 12544 538 6960 1.2 58.6 809 1 37 20330 569676
+14	90547 2014 3265 5567 7.6 23.8 130 7 17 1814 26110
 

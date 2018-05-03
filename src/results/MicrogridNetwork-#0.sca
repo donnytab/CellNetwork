@@ -1,0 +1,137 @@
+version 2
+run MicrogridNetwork-0-20180503-17:44:27-16124
+attr configname MicrogridNetwork
+attr datetime 20180503-17:44:27
+attr experiment MicrogridNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network MicrogridNetwork
+attr processid 16124
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg 19.490434782609
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, timeavg"
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max 37
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, max"
+scalar MicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min 1
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, min"
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg 15.500978473581
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, timeavg"
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:max 17
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, max"
+scalar MicrogridNetwork.macro[0] timeMediumQueueMsgTime:min 7
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, min"
+scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 6.2869565217391
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, timeavg"
+scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 7
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, max"
+scalar MicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 1
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, min"
+scalar MicrogridNetwork.pico[0].queue averageThroughput:timeavg 258.31686541738
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar MicrogridNetwork.pico[0].queue averageThroughput:max 288
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar MicrogridNetwork.pico[0].queue queueingTime:mean 29.8
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar MicrogridNetwork.pico[0].queue queueingTime:max 58.5
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar MicrogridNetwork.pico[0].queue busy:timeavg 0.99829642248722
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar MicrogridNetwork.pico[0].queue queueLength:timeavg 117.50596252129
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar MicrogridNetwork.pico[0].queue queueLength:max 235
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar MicrogridNetwork.pico[1].queue averageThroughput:timeavg 258.31686541738
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar MicrogridNetwork.pico[1].queue averageThroughput:max 288
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar MicrogridNetwork.pico[1].queue queueingTime:mean 29.8
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar MicrogridNetwork.pico[1].queue queueingTime:max 58.5
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar MicrogridNetwork.pico[1].queue busy:timeavg 0.99829642248722
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar MicrogridNetwork.pico[1].queue queueLength:timeavg 117.50596252129
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar MicrogridNetwork.pico[1].queue queueLength:max 235
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar MicrogridNetwork.pico[2].queue averageThroughput:timeavg 258.31686541738
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar MicrogridNetwork.pico[2].queue averageThroughput:max 288
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar MicrogridNetwork.pico[2].queue queueingTime:mean 29.8
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar MicrogridNetwork.pico[2].queue queueingTime:max 58.5
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar MicrogridNetwork.pico[2].queue busy:timeavg 0.99829642248722
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar MicrogridNetwork.pico[2].queue queueLength:timeavg 117.50596252129
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar MicrogridNetwork.pico[2].queue queueLength:max 235
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar MicrogridNetwork.pico[3].queue averageThroughput:timeavg 258.31686541738
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar MicrogridNetwork.pico[3].queue averageThroughput:max 288
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar MicrogridNetwork.pico[3].queue queueingTime:mean 29.8
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar MicrogridNetwork.pico[3].queue queueingTime:max 58.5
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar MicrogridNetwork.pico[3].queue busy:timeavg 0.99829642248722
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar MicrogridNetwork.pico[3].queue queueLength:timeavg 117.50596252129
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar MicrogridNetwork.pico[3].queue queueLength:max 235
+attr interpolationmode sample-hold
+attr title "queue length, max"
+
