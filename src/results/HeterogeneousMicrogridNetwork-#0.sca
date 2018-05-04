@@ -1,0 +1,137 @@
+version 2
+run HeterogeneousMicrogridNetwork-0-20180503-19:41:51-16299
+attr configname HeterogeneousMicrogridNetwork
+attr datetime 20180503-19:41:51
+attr experiment HeterogeneousMicrogridNetwork
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network HeterogeneousMicrogridNetwork
+attr processid 16299
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar HeterogeneousMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg 27.23642172524
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, timeavg"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max 45
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, max"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min 3
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, min"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg 18.981072555205
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, timeavg"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeMediumQueueMsgTime:max 25
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, max"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeMediumQueueMsgTime:min 2
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, min"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 8.1157455683003
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, timeavg"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 9
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, max"
+scalar HeterogeneousMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 1
+attr interpolationmode sample-hold
+attr title "timeSensitiveQueueMsgTime, min"
+scalar HeterogeneousMicrogridNetwork.pico[0].queue averageThroughput:timeavg 112.52317198764
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[0].queue averageThroughput:max 120
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar HeterogeneousMicrogridNetwork.pico[0].queue queueingTime:mean 13
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[0].queue queueingTime:max 24.9
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[0].queue busy:timeavg 0.25746652935118
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[0].queue queueLength:timeavg 8.8362512873326
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[0].queue queueLength:max 67
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar HeterogeneousMicrogridNetwork.pico[1].queue averageThroughput:timeavg 225.04634397528
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[1].queue averageThroughput:max 240
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar HeterogeneousMicrogridNetwork.pico[1].queue queueingTime:mean 25
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[1].queue queueingTime:max 48.9
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[1].queue busy:timeavg 0.50463439752832
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[1].queue queueLength:timeavg 47.332646755922
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[1].queue queueLength:max 187
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar HeterogeneousMicrogridNetwork.pico[2].queue averageThroughput:timeavg 337.56951596292
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[2].queue averageThroughput:max 360
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar HeterogeneousMicrogridNetwork.pico[2].queue queueingTime:mean 37
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[2].queue queueingTime:max 72.9
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[2].queue busy:timeavg 0.75180226570546
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[2].queue queueLength:timeavg 115.48918640577
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[2].queue queueLength:max 307
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar HeterogeneousMicrogridNetwork.pico[3].queue averageThroughput:timeavg 450.09268795057
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[3].queue averageThroughput:max 480
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar HeterogeneousMicrogridNetwork.pico[3].queue queueingTime:mean 49
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[3].queue queueingTime:max 96.9
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar HeterogeneousMicrogridNetwork.pico[3].queue busy:timeavg 0.9989701338826
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[3].queue queueLength:timeavg 213.30587023687
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar HeterogeneousMicrogridNetwork.pico[3].queue queueLength:max 427
+attr interpolationmode sample-hold
+attr title "queue length, max"
+

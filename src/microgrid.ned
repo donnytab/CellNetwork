@@ -446,27 +446,65 @@ network HeterogeneousMicrogridNetwork
         user[2].in <-- Channel <-- pico[0].priorityOut++;
         user[3].in <-- Channel <-- pico[0].priorityOut++;
         user[4].in <-- Channel <-- pico[0].priorityOut++;
-        user[5].in <-- Channel <-- pico[0].priorityOut++;
+        user[5].in <-- Channel <-- pico[1].priorityOut++;
         user[6].in <-- Channel <-- pico[1].priorityOut++;
         user[7].in <-- Channel <-- pico[1].priorityOut++;
         user[8].in <-- Channel <-- pico[1].priorityOut++;
-        user[9].in <-- Channel <-- pico[2].priorityOut++;
-        user[10].in <-- Channel <-- pico[2].priorityOut++;
-        user[11].in <-- Channel <-- pico[3].priorityOut++;
+        user[9].in <-- Channel <-- pico[1].priorityOut++;
+        user[10].in <-- Channel <-- pico[1].priorityOut++;
+        user[11].in <-- Channel <-- pico[1].priorityOut++;
+        user[12].in <-- Channel <-- pico[1].priorityOut++;
+        user[13].in <-- Channel <-- pico[1].priorityOut++;
+        user[14].in <-- Channel <-- pico[1].priorityOut++;
+        user[15].in <-- Channel <-- pico[2].priorityOut++;
+        user[16].in <-- Channel <-- pico[2].priorityOut++;
+        user[17].in <-- Channel <-- pico[2].priorityOut++;
+        user[18].in <-- Channel <-- pico[2].priorityOut++;
+        user[19].in <-- Channel <-- pico[2].priorityOut++;
+        user[20].in <-- Channel <-- pico[2].priorityOut++;
+        user[21].in <-- Channel <-- pico[2].priorityOut++;
+        user[22].in <-- Channel <-- pico[2].priorityOut++;
+        user[23].in <-- Channel <-- pico[2].priorityOut++;
+        user[24].in <-- Channel <-- pico[2].priorityOut++;
+        user[25].in <-- Channel <-- pico[2].priorityOut++;
+        user[26].in <-- Channel <-- pico[2].priorityOut++;
+        user[27].in <-- Channel <-- pico[2].priorityOut++;
+        user[28].in <-- Channel <-- pico[2].priorityOut++;
+        user[29].in <-- Channel <-- pico[2].priorityOut++;
+        user[30].in <-- Channel <-- pico[3].priorityOut++;
+        user[31].in <-- Channel <-- pico[3].priorityOut++;
+        user[32].in <-- Channel <-- pico[3].priorityOut++;
+        user[33].in <-- Channel <-- pico[3].priorityOut++;
+        user[34].in <-- Channel <-- pico[3].priorityOut++;
+        user[35].in <-- Channel <-- pico[3].priorityOut++;
+        user[36].in <-- Channel <-- pico[3].priorityOut++;
+        user[37].in <-- Channel <-- pico[3].priorityOut++;
+        user[38].in <-- Channel <-- pico[3].priorityOut++;
+        user[39].in <-- Channel <-- pico[3].priorityOut++;
+        user[40].in <-- Channel <-- pico[3].priorityOut++;
+        user[41].in <-- Channel <-- pico[3].priorityOut++;
+        user[42].in <-- Channel <-- pico[3].priorityOut++;
+        user[43].in <-- Channel <-- pico[3].priorityOut++;
+        user[44].in <-- Channel <-- pico[3].priorityOut++;
+        user[45].in <-- Channel <-- pico[3].priorityOut++;
+        user[46].in <-- Channel <-- pico[3].priorityOut++;
+        user[47].in <-- Channel <-- pico[3].priorityOut++;
+        user[48].in <-- Channel <-- pico[3].priorityOut++;
+        user[49].in <-- Channel <-- pico[3].priorityOut++;
         
-        for k=0..5 {
+        for k=0..4 {
             macro[0].in++ <-- Channel <-- pico[0].out++;
         }
         
-        for k=0..2 {
+        for k=0..9 {
             macro[0].in++ <-- Channel <-- pico[1].out++;
         }
         
-        for k=0..1 {
+        for k=0..14 {
             macro[0].in++ <-- Channel <-- pico[2].out++;
         }
         
-        for k=0..0 {
+        for k=0..19 {
             macro[0].in++ <-- Channel <-- pico[3].out++;
         }
 }
