@@ -1,45 +1,81 @@
 version 2
-run NaiveUniformMicrogridNetwork-0-20180406-13:16:06-48431
+run NaiveUniformMicrogridNetwork-0-20180504-02:27:41-16667
 attr configname NaiveUniformMicrogridNetwork
-attr datetime 20180406-13:16:06
+attr datetime 20180504-02:27:41
 attr experiment NaiveUniformMicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NaiveUniformMicrogridNetwork
-attr processid 48431
+attr processid 16667
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:timeavg 2.5126050420168
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, timeavg"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:max 6
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, max"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:min 0
 attr interpolationmode sample-hold
 attr title "timeTolerantQueueMsgTime, min"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:timeavg 2.5210084033613
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, timeavg"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:max nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:max 5
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, max"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:min nan
+scalar NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:min 0
 attr interpolationmode sample-hold
 attr title "timeMediumQueueMsgTime, min"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 3.8695652173913
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:timeavg 2.563025210084
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, timeavg"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 7
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:max 5
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, max"
-scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 1
+scalar NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:min 0
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, min"
+scalar NaiveUniformMicrogridNetwork.pico[0] averageThroughput:timeavg nan
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar NaiveUniformMicrogridNetwork.pico[0] averageThroughput:max nan
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar NaiveUniformMicrogridNetwork.pico[0] averageThroughput:min nan
+attr interpolationmode sample-hold
+attr title "average throughput, min"
+scalar NaiveUniformMicrogridNetwork.pico[1] averageThroughput:timeavg nan
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar NaiveUniformMicrogridNetwork.pico[1] averageThroughput:max nan
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar NaiveUniformMicrogridNetwork.pico[1] averageThroughput:min nan
+attr interpolationmode sample-hold
+attr title "average throughput, min"
+scalar NaiveUniformMicrogridNetwork.pico[2] averageThroughput:timeavg nan
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar NaiveUniformMicrogridNetwork.pico[2] averageThroughput:max nan
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar NaiveUniformMicrogridNetwork.pico[2] averageThroughput:min nan
+attr interpolationmode sample-hold
+attr title "average throughput, min"
+scalar NaiveUniformMicrogridNetwork.pico[3] averageThroughput:timeavg nan
+attr interpolationmode sample-hold
+attr title "average throughput, timeavg"
+scalar NaiveUniformMicrogridNetwork.pico[3] averageThroughput:max nan
+attr interpolationmode sample-hold
+attr title "average throughput, max"
+scalar NaiveUniformMicrogridNetwork.pico[3] averageThroughput:min nan
+attr interpolationmode sample-hold
+attr title "average throughput, min"
 

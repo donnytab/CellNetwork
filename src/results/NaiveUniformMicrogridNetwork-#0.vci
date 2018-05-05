@@ -1,15 +1,15 @@
-file 3845 1523035060                                            
+file 15856 1525416586                                           
 version 2
-run NaiveUniformMicrogridNetwork-0-20180406-13:16:06-48431
+run NaiveUniformMicrogridNetwork-0-20180504-02:27:41-16667
 attr configname NaiveUniformMicrogridNetwork
-attr datetime 20180406-13:16:06
+attr datetime 20180504-02:27:41
 attr experiment NaiveUniformMicrogridNetwork
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network NaiveUniformMicrogridNetwork
-attr processid 48431
+attr processid 16667
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -19,5 +19,13 @@ attr seedset 0
 vector 0 NaiveUniformMicrogridNetwork.macro[0] timeSensitiveQueueMsgTime:vector ETV
 attr interpolationmode sample-hold
 attr title "timeSensitiveQueueMsgTime, vector"
-0	604 3240 73 864 1.5 13 288 1 7 1086 4992
+vector 1 NaiveUniformMicrogridNetwork.macro[0] timeTolerantQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeTolerantQueueMsgTime, vector"
+vector 2 NaiveUniformMicrogridNetwork.macro[0] timeMediumQueueMsgTime:vector ETV
+attr interpolationmode sample-hold
+attr title "timeMediumQueueMsgTime, vector"
+0	928 2753 98 4644 0.2 11.7 213 0 5 515 1815
+1	3681 10494 100 4652 0.2 11.7 809 0 6 2037 7601
+2	14175 1680 118 4650 0.2 11.7 130 0 5 302 1044
 
